@@ -33,4 +33,12 @@ class MyIcons {
         size: size,
         color: color,
       );
+
+  static Icon leadingIcon(
+          {double size = 30, Color color = ConstColors.blackColor}) =>
+      Icon(
+        Icons.keyboard_backspace,
+        size: size,
+        color: color,
+      );
 }

@@ -82,12 +82,12 @@ Widget CarCard({required Car car, required double height}) {
   );
 }
 
-List<Widget> stars(int nbr) {
+List<Widget> stars(int nbr, {double size = 20}) {
   List<Widget> stars = [];
   for (int i = 0; i < nbr; i++) {
     stars.add(Container(
       margin: EdgeInsets.symmetric(horizontal: 1),
-        child: MyIcons.starIcon(color: ConstColors.goldenColor, size: 20)));
+        child: MyIcons.starIcon(color: ConstColors.goldenColor, size: size)));
   }
   return stars;
 }

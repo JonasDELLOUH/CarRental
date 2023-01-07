@@ -1,6 +1,8 @@
 import 'package:car_rental/constants/word_language.dart';
 import 'package:car_rental/models/address.dart';
+import 'package:car_rental/models/car_brand.dart';
 import 'package:car_rental/providers/auth_provider.dart';
+import 'package:car_rental/screens/car_details.dart';
 import 'package:car_rental/screens/home.dart';
 import 'package:car_rental/screens/sign_in.dart';
 import 'package:car_rental/screens/test.dart';
@@ -12,6 +14,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'constants/colors.dart';
 import 'firebase_options.dart';
+import 'models/car.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,8 +45,31 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
             backgroundColor: ConstColors.backgroundColor,
+            appBarTheme:  const AppBarTheme(
+              backgroundColor: ConstColors.backgroundColor,
+            ),
           ),
-          home: const Home(),
+          home: CarDetails(
+            car: Car(
+                carId: "mkQ044PKvlQkysHc2fH7",
+                carBrand: CarBrand(
+                    carBrandId: "VOvGIDu0uR68F6BPDliZ",
+                    carBrandImageUrl:
+                        "https://firebasestorage.googleapis.com/v0/b/carrental-89ac9.appspot.com/o/carBrand%2FVOvGIDu0uR68F6BPDliZ?alt=media&token=890c6e69-61a5-47e3-8cc1-a66b12bee6f7",
+                    carBrandName: "Ferrary"),
+                nbrPlaces: 5,
+                nbrStars: 4,
+                rentalPrice: 2500,
+                carSpeed: 600,
+                carImageUrl:
+                    "https://firebasestorage.googleapis.com/v0/b/carrental-89ac9.appspot.com/o/car%2FmkQ044PKvlQkysHc2fH7?alt=media&token=0b4e0b03-7183-4fb4-8dec-cf592548e684",
+                carModel: "RTRS",
+                addedDate: 602,
+                isReserved: false,
+                isRented: false,
+                overview:
+                    "Voiture class, très accessible à conduire et super cool."),
+          ),
         ));
   }
 }

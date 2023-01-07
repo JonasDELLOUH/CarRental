@@ -18,7 +18,8 @@ class WordLanguage extends Translations {
           'home_express2': 'Enjoy driving pleasure',
           'search': 'Search',
           'best_brand': 'The best brands',
-          'day': 'day'
+          'day': 'day',
+          'overview': 'Overview'
         },
         'fr_FR': {
           'sign': 'Connectez-vous à votre compte',
@@ -35,7 +36,8 @@ class WordLanguage extends Translations {
           'home_express2': 'Profitez du plaisir de conduire',
           'search': 'Rechercher',
           'best_brand': 'Les meilleures marques',
-          'day': 'jour'
+          'day': 'jour',
+          'overview': 'Aperçu'
         }
       };
 }
