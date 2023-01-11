@@ -35,7 +35,9 @@ class _SearchPageState extends State<SearchPage> {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: WPSearchBar(
-        appBarBackgroundColor: ConstColors.blueColor,
+        iconTheme: const IconThemeData(color: ConstColors.blueColor),
+        appBarForegroundColor: ConstColors.blueColor,
+        appBarBackgroundColor: ConstColors.backgroundColor,
         listOfFilters: {
           'model': {
             'name': 'model',
@@ -67,7 +69,7 @@ class _SearchPageState extends State<SearchPage> {
           }
         },
         materialDesign: {
-          'title': {'text': "${'car'.tr}s"}
+          'title': {'text': "${'search_cars'.tr}s"}
         },
         onSearch: (filter, value, operation) {
           setState(() {
@@ -104,11 +106,9 @@ class _SearchPageState extends State<SearchPage> {
                 : choice == 2
                     ? carServices.getCarsWithFilter(brand: values)
                     : choice == 3
-                        ? carServices.getCarsWithFilter(
-                            places: int.parse(values))
+                        ? carServices.getCarsWithFilter(places: values)
                         : choice == 4
-                            ? carServices.getCarsWithFilter(
-                                price: double.parse(values))
+                            ? carServices.getCarsWithFilter(price: values)
                             : carServices.getCars(),
             builder: (BuildContext context, AsyncSnapshot<List<Car>> snapshot) {
               if (snapshot.hasError) {

@@ -2,7 +2,7 @@ import 'package:intl/date_symbol_data_file.dart';
 import 'package:intl/intl.dart';
 
 class DateHandler {
-  String myDate(int timestamp) {
+  static String myDate(int timestamp) {
     String locale = "fr_FR";
     initializeDateFormatting(locale, "");
     DateTime postDate = DateTime.fromMillisecondsSinceEpoch(timestamp);

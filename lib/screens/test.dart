@@ -1,8 +1,9 @@
 import 'dart:io';
 
 import 'package:car_rental/models/car.dart';
-import 'package:car_rental/models/car_brand.dart';
-import 'package:car_rental/services/car_services.dart';
+import 'package:car_rental/models/customer.dart';
+import 'package:car_rental/models/reservation.dart';
+import 'package:car_rental/services/reservation_services.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -40,7 +41,7 @@ class _WritePostState extends State<WritePost> {
         height: MediaQuery.of(context).size.height * 0.8,
         width: MediaQuery.of(context).size.width,
         child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               color: Colors.red,
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(25), topRight: Radius.circular(25))),
@@ -49,7 +50,7 @@ class _WritePostState extends State<WritePost> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Text("Ecrivez quelque chose ..."),
+                  const Text("Ecrivez quelque chose ..."),
                   TextField(
                     controller: _controller,
                     decoration: InputDecoration(
@@ -114,15 +115,14 @@ class _WritePostState extends State<WritePost> {
   sendToFirebase() {
     FocusScope.of(context).requestFocus(FocusNode());
     // Navigator.pop(context);
-    if ((_imageFile != null) ||
-        (_controller.text != null && _controller.text != "")) {
-      CarBrand carBrand = CarBrand(carBrandId: "VOvGIDu0uR68F6BPDliZ", carBrandImageUrl: "", carBrandName: "Mercedes");
-      // CarBrandService carBrandService = CarBrandService();
-      // carBrandService.addToFirebase(carBrand.toMap(), file: _imageFile);
-
-      Car car = Car(carId: "", carBrand: carBrand, nbrPlaces: 5, nbrStars: 4, rentalPrice: 2500, carSpeed: 600, carImageUrl: "", carModel: "RTRS", addedDate: DateTime.now().millisecond, isReserved: false, isRented: false, overview: 'Cette voiture est haut game et très cool');
-      CarServices carServices = CarServices();
-      carServices.addToFirebase(car.toMap(), file: _imageFile);
+    if (true) {
+      Reservation reservation = Reservation(
+          reservationId: "",
+          customer: Customer.defaultCustomer(),
+          car: Car.defaultCar(),
+          reservationDate: DateTime.now().millisecondsSinceEpoch.toInt());
+      ReservationServices reservationServices = ReservationServices();
+      reservationServices.addToFirebase(reservation.toMap());
     }
   }
 }

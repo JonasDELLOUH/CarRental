@@ -44,7 +44,7 @@ class Car {
       FirestoreConstants.carSpeed: carSpeed,
       FirestoreConstants.imageUrl: carImageUrl,
       FirestoreConstants.carModel: carModel,
-      FirestoreConstants.addedDate: addedDate,
+      FirestoreConstants.addedDate: DateTime.now().millisecondsSinceEpoch.toInt(),
       FirestoreConstants.isReserved: isReserved,
       FirestoreConstants.isRented: isRented,
       FirestoreConstants.overview: overview

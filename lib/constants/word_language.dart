@@ -27,7 +27,10 @@ class WordLanguage extends Translations {
           'available': 'Available',
           'reserve_now': 'Reserve Now',
           'brand': 'Brand',
-          'car': 'Car'
+          'car': 'Car',
+          'search_cars': 'Search Cars',
+          'reservation': 'Reservations',
+          'reserve_at': "Reserve"
         },
         'fr_FR': {
           'sign': 'Connectez-vous à votre compte',
@@ -53,7 +56,10 @@ class WordLanguage extends Translations {
           'available': 'Disponible',
           'reserve_now': 'Réserver Maintenant',
           'brand': 'Marque',
-          'car': 'Car'
+          'car': 'Car',
+          'search_cars': 'Rechercher des Voitures',
+          'reservation': 'Réservations',
+          'reserve_at': 'Réservée le'
         }
       };
 }

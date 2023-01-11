@@ -14,49 +14,59 @@ class CarServices extends BaseServices {
 
   Stream<List<Car>> getCars() async* {
     List<Car> carList = [];
-    QuerySnapshot querySnapshot =
-    await firestoreInstance.collection(collectionName).get();
-    for (DocumentSnapshot documentSnapshot in querySnapshot.docs) {
-      Map<String, dynamic> data =
-      documentSnapshot.data()! as Map<String, dynamic>;
+    try{
+      QuerySnapshot querySnapshot =
+      await firestoreInstance.collection(collectionName).get();
+      for (DocumentSnapshot documentSnapshot in querySnapshot.docs) {
+        Map<String, dynamic> data =
+        documentSnapshot.data()! as Map<String, dynamic>;
 
-      CarBrandService carBrandService = CarBrandService();
-      Map<String, dynamic>? map = {};
-      map = await carBrandService.getDataToMap(
-          document: data[FirestoreConstants.carBrand]);
-      data[FirestoreConstants.carBrand] = map;
-      Car car = Car.basicFromMap(data);
-      carList.add(car);
+        CarBrandService carBrandService = CarBrandService();
+        Map<String, dynamic>? map = {};
+        map = await carBrandService.getDataToMap(
+            document: data[FirestoreConstants.carBrand]);
+        data[FirestoreConstants.carBrand] = map;
+        Car car = Car.basicFromMap(data);
+        carList.add(car);
+      }
+    } catch(e, strace){
+      print("Voici l'erreur : $e");
+      print("Voici le strace : $strace");
     }
+
     yield carList;
   }
 
-  Stream<List<Car>> getCarsWithFilter({String model = "",
-    String brand = "",
-    double price = 0,
-    int places = 0}) async* {
+  Stream<List<Car>> getCarsWithFilter(
+      {String model = "",
+      String brand = "",
+      String price = "",
+      String places = ""}) async* {
     List<Car> carList = [];
     QuerySnapshot querySnapshot;
     print("yesssssss voici model : $model");
     if (model.isNotEmpty) {
+      print("model is not empty");
       querySnapshot = await firestoreInstance
           .collection(collectionName)
-          .where(FirestoreConstants.carModel, arrayContains: model)
+          .where(FirestoreConstants.carModel, isEqualTo: model)
           .get();
     }
     // if(brand.isNotEmpty){
     //   querySnapshot =
     //   await firestoreInstance.collection(collectionName).where(FirestoreConstants.carBrandName, arrayContains: "v").get();
     // }
-    else if (places > 0) {
+    else if (places.isNotEmpty) {
       querySnapshot = await firestoreInstance
           .collection(collectionName)
-          .where(FirestoreConstants.nbrPlaces, isLessThanOrEqualTo: places)
+          .where(FirestoreConstants.nbrPlaces,
+              isGreaterThanOrEqualTo: int.parse(places))
           .get();
-    } else if (price > 0) {
+    } else if (price.isNotEmpty) {
       querySnapshot = await firestoreInstance
           .collection(collectionName)
-          .where("vv", arrayContains: "v")
+          .where(FirestoreConstants.rentalPrice,
+              isLessThanOrEqualTo: double.parse(price))
           .get();
     } else {
       querySnapshot = await firestoreInstance.collection(collectionName).get();
@@ -64,7 +74,7 @@ class CarServices extends BaseServices {
 
     for (DocumentSnapshot documentSnapshot in querySnapshot.docs) {
       Map<String, dynamic> data =
-      documentSnapshot.data()! as Map<String, dynamic>;
+          documentSnapshot.data()! as Map<String, dynamic>;
 
       CarBrandService carBrandService = CarBrandService();
       Map<String, dynamic>? map = {};

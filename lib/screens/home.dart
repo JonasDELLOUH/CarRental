@@ -9,7 +9,6 @@ import 'package:car_rental/services/car_services.dart';
 import 'package:car_rental/utility/car_brand_card.dart';
 import 'package:car_rental/utility/car_card.dart';
 import 'package:car_rental/widgets/text_widgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';

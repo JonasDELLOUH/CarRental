@@ -20,7 +20,7 @@ abstract class BaseServices {
     return urlString;
   }
 
-  Future<void> addToFirebase(Map<String, dynamic> map, {File? file}) async {
+  Future<void> addToFirebase(Map<String, dynamic> map, {File? file, File? file2, File? file3, File? file4}) async {
     try {
       final document = firestoreInstance.collection(collectionName).doc();
       map[FirestoreConstants.id] = document.id;
@@ -28,6 +28,21 @@ abstract class BaseServices {
         final ref = storageRef.child(collectionName).child(document.id);
         final urlString = await addImageToStorage(ref, file);
         map[FirestoreConstants.imageUrl] = urlString;
+      }
+      if(file2 != null) {
+        final ref = storageRef.child(collectionName).child(document.id);
+        final urlString = await addImageToStorage(ref, file2);
+        map[FirestoreConstants.imageUrl2] = urlString;
+      }
+      if(file3 != null) {
+        final ref = storageRef.child(collectionName).child(document.id);
+        final urlString = await addImageToStorage(ref, file3);
+        map[FirestoreConstants.imageUrl3] = urlString;
+      }
+      if(file4 != null) {
+        final ref = storageRef.child(collectionName).child(document.id);
+        final urlString = await addImageToStorage(ref, file4);
+        map[FirestoreConstants.imageUrl4] = urlString;
       }
       await document.set(map);
     } catch (e, strace) {

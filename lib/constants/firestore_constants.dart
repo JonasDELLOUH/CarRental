@@ -1,7 +1,15 @@
 class FirestoreConstants{
 
   static String imageUrl = "imageUrl";
+  static String imageUrl2 = "imageUrl2";
+  static String imageUrl3 = "imageUrl3";
+  static String imageUrl4 = "imageUrl4";
   static String id = "id";
+
+  /// Member
+  static String memberFullName = "memberFullName";
+  static String memberPhoneNumber = "memberPhoneNumber";
+  static String memberEmail = "memberEmail";
 
   /// Address
   static String address = "address";
@@ -30,7 +38,8 @@ class FirestoreConstants{
   ///Customer
   static String member = "member";
   static String customer = "customer";
-  static String identityFileUrl = "identityFileUrl";
-  static String memberImageUrl = "memberImageUrl";
 
+  ///Reservation
+  static String reservation = "reservation";
+  static String reservationDate = "reservationDate";
 }

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../constants/my_icons.dart';
+import '../models/customer.dart';
 import 'home.dart';
 
 class MainScreen extends StatefulWidget {
@@ -33,7 +34,9 @@ class _MainScreenState extends State<MainScreen> {
                   ? const SettingsPage()
                   : whatPageProvider.whatPageStatus ==
                           WhatPageStatus.reservation
-                      ? const ReservationsPage()
+                      ? ReservationsPage(
+                          customer: Customer.defaultCustomer(),
+                        )
                       : const CircularProgressIndicator(),
       bottomNavigationBar: BottomAppBar(
         color: ConstColors.backgroundColor,
@@ -41,22 +44,38 @@ class _MainScreenState extends State<MainScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           mainAxisSize: MainAxisSize.max,
           children: [
-            BarItem(iconData: MyIcons.homeIconData(), onPressed: (){
-              whatPageProvider.whatPageStatus = WhatPageStatus.home;
-              whatPageProvider.notify();
-            }, selected: whatPageProvider.whatPageStatus == WhatPageStatus.home),
-            BarItem(iconData: MyIcons.carIconData(), onPressed: (){
-              whatPageProvider.whatPageStatus = WhatPageStatus.reservation;
-              whatPageProvider.notify();
-            }, selected: whatPageProvider.whatPageStatus == WhatPageStatus.reservation),
-            BarItem(iconData: MyIcons.notificationIconData(), onPressed: (){
-              whatPageProvider.whatPageStatus = WhatPageStatus.notification;
-              whatPageProvider.notify();
-            }, selected: whatPageProvider.whatPageStatus == WhatPageStatus.notification),
-            BarItem(iconData: MyIcons.settingIconData(), onPressed: (){
-              whatPageProvider.whatPageStatus = WhatPageStatus.setting;
-              whatPageProvider.notify();
-            }, selected: whatPageProvider.whatPageStatus == WhatPageStatus.setting)
+            BarItem(
+                iconData: MyIcons.homeIconData(),
+                onPressed: () {
+                  whatPageProvider.whatPageStatus = WhatPageStatus.home;
+                  whatPageProvider.notify();
+                },
+                selected:
+                    whatPageProvider.whatPageStatus == WhatPageStatus.home),
+            BarItem(
+                iconData: MyIcons.carIconData(),
+                onPressed: () {
+                  whatPageProvider.whatPageStatus = WhatPageStatus.reservation;
+                  whatPageProvider.notify();
+                },
+                selected: whatPageProvider.whatPageStatus ==
+                    WhatPageStatus.reservation),
+            BarItem(
+                iconData: MyIcons.notificationIconData(),
+                onPressed: () {
+                  whatPageProvider.whatPageStatus = WhatPageStatus.notification;
+                  whatPageProvider.notify();
+                },
+                selected: whatPageProvider.whatPageStatus ==
+                    WhatPageStatus.notification),
+            BarItem(
+                iconData: MyIcons.settingIconData(),
+                onPressed: () {
+                  whatPageProvider.whatPageStatus = WhatPageStatus.setting;
+                  whatPageProvider.notify();
+                },
+                selected:
+                    whatPageProvider.whatPageStatus == WhatPageStatus.setting)
           ],
         ),
       ),
