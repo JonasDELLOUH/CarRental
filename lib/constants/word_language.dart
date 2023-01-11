@@ -18,8 +18,16 @@ class WordLanguage extends Translations {
           'home_express2': 'Enjoy driving pleasure',
           'search': 'Search',
           'best_brand': 'The best brands',
-          'day': 'day',
-          'overview': 'Overview'
+          'day': 'Day',
+          'overview': 'Overview',
+          'see_more': 'See more',
+          'see_less': 'See less',
+          'seats': 'Seats',
+          'reserve': 'Reserve',
+          'available': 'Available',
+          'reserve_now': 'Reserve Now',
+          'brand': 'Brand',
+          'car': 'Car'
         },
         'fr_FR': {
           'sign': 'Connectez-vous à votre compte',
@@ -36,8 +44,16 @@ class WordLanguage extends Translations {
           'home_express2': 'Profitez du plaisir de conduire',
           'search': 'Rechercher',
           'best_brand': 'Les meilleures marques',
-          'day': 'jour',
-          'overview': 'Aperçu'
+          'day': 'Jour',
+          'overview': 'Aperçu',
+          'see_more': 'voir plus',
+          'see_less': 'voir moins',
+          'seats': 'Places',
+          'reserve': 'Réservé',
+          'available': 'Disponible',
+          'reserve_now': 'Réserver Maintenant',
+          'brand': 'Marque',
+          'car': 'Car'
         }
       };
 }

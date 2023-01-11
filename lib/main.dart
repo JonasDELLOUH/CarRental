@@ -2,8 +2,10 @@ import 'package:car_rental/constants/word_language.dart';
 import 'package:car_rental/models/address.dart';
 import 'package:car_rental/models/car_brand.dart';
 import 'package:car_rental/providers/auth_provider.dart';
+import 'package:car_rental/providers/firestore_provider.dart';
 import 'package:car_rental/screens/car_details.dart';
 import 'package:car_rental/screens/home.dart';
+import 'package:car_rental/screens/main_screen.dart';
 import 'package:car_rental/screens/sign_in.dart';
 import 'package:car_rental/screens/test.dart';
 import 'package:car_rental/services/address_services.dart';
@@ -23,6 +25,7 @@ Future<void> main() async {
   );
   // Locale myLocale = Localizations.localeOf(context);
   runApp(GetMaterialApp(
+    debugShowCheckedModeBanner: false,
     home: const MyApp(),
     translations: WordLanguage(),
     locale: const Locale('fr', 'FR'),
@@ -38,7 +41,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [ChangeNotifierProvider(create: (_) => AuthProvider())],
+        providers: [
+          ChangeNotifierProvider(create: (_) => AuthProvider()),
+          ChangeNotifierProvider(create: (_) => WhatPageProvider()),
+          ChangeNotifierProvider(create: (_) => FirestoreProvider())
+        ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
@@ -49,27 +56,7 @@ class MyApp extends StatelessWidget {
               backgroundColor: ConstColors.backgroundColor,
             ),
           ),
-          home: CarDetails(
-            car: Car(
-                carId: "mkQ044PKvlQkysHc2fH7",
-                carBrand: CarBrand(
-                    carBrandId: "VOvGIDu0uR68F6BPDliZ",
-                    carBrandImageUrl:
-                        "https://firebasestorage.googleapis.com/v0/b/carrental-89ac9.appspot.com/o/carBrand%2FVOvGIDu0uR68F6BPDliZ?alt=media&token=890c6e69-61a5-47e3-8cc1-a66b12bee6f7",
-                    carBrandName: "Ferrary"),
-                nbrPlaces: 5,
-                nbrStars: 4,
-                rentalPrice: 2500,
-                carSpeed: 600,
-                carImageUrl:
-                    "https://firebasestorage.googleapis.com/v0/b/carrental-89ac9.appspot.com/o/car%2FmkQ044PKvlQkysHc2fH7?alt=media&token=0b4e0b03-7183-4fb4-8dec-cf592548e684",
-                carModel: "RTRS",
-                addedDate: 602,
-                isReserved: false,
-                isRented: false,
-                overview:
-                    "Voiture class, très accessible à conduire et super cool."),
-          ),
+          home: const MainScreen(),
         ));
   }
 }

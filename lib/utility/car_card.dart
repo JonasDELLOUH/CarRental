@@ -6,17 +6,17 @@ import '../constants/colors.dart';
 import '../constants/my_icons.dart';
 import '../models/car.dart';
 
-Widget CarCard({required Car car, required double height}) {
+Widget CarCard({required Car car, required double height, required void Function() function}) {
   return InkWell(
-    onTap: () {},
+    onTap: function,
     child: Container(
-      margin: EdgeInsets.all(5),
+      margin: const EdgeInsets.all(5),
       padding: EdgeInsets.zero,
       // height: height * 0.6,
       // width: height * 0.5,
       decoration: BoxDecoration(
           color: ConstColors.backgroundColor,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             bottomRight: Radius.circular(20),
             bottomLeft: Radius.circular(20),
             topRight: Radius.circular(20),
@@ -25,7 +25,7 @@ Widget CarCard({required Car car, required double height}) {
           boxShadow: [
             BoxShadow(
               color: ConstColors.primaryColor.withOpacity(0.3),
-              offset: Offset(0.0, 3.0),
+              offset: const Offset(0.0, 3.0),
               blurRadius: 1,
             ),
           ]),
@@ -33,7 +33,7 @@ Widget CarCard({required Car car, required double height}) {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
                 bottomRight: Radius.circular(20),
                 bottomLeft: Radius.circular(20),
                 topRight: Radius.circular(20),
@@ -55,7 +55,7 @@ Widget CarCard({required Car car, required double height}) {
                 Row(
                   children: stars(car.nbrStars),
                 ),
-                SizedBox(height: 1,),
+                const SizedBox(height: 1,),
                 Row(
                   children: [
                     MyIcons.directionsCarFilled(
@@ -64,7 +64,7 @@ Widget CarCard({required Car car, required double height}) {
                     richText(text: " ${car.nbrPlaces.toString()} places", fontSize: 15),
                   ],
                 ),
-                SizedBox(height: 2,),
+                const SizedBox(height: 2,),
                 Row(
                   children: [
                     MyIcons.attachMoney(
@@ -86,7 +86,7 @@ List<Widget> stars(int nbr, {double size = 20}) {
   List<Widget> stars = [];
   for (int i = 0; i < nbr; i++) {
     stars.add(Container(
-      margin: EdgeInsets.symmetric(horizontal: 1),
+      margin: const EdgeInsets.symmetric(horizontal: 1),
         child: MyIcons.starIcon(color: ConstColors.goldenColor, size: size)));
   }
   return stars;

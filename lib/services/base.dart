@@ -1,12 +1,14 @@
 import 'dart:io';
 
 import 'package:car_rental/constants/firestore_constants.dart';
+import 'package:car_rental/providers/firestore_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 abstract class BaseServices {
   String collectionName = "";
   static final firestoreInstance = FirebaseFirestore.instance;
+  FirestoreProvider firestoreProvider = FirestoreProvider();
 
   //Storage
   static final storageRef = FirebaseStorage.instance.ref();
@@ -60,13 +62,11 @@ abstract class BaseServices {
     if (documentSnapshot.exists) {
       map = documentSnapshot.data() as Map<String, dynamic>;
       print('Document data: ${documentSnapshot.data()}');
-      print("Voici : ${map['id']}");
       return map;
     } else {
       print('Document does not exist on the database');
       return null;
     }
-
   }
 
   Stream<QuerySnapshot> getCollectionStream() {

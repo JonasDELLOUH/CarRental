@@ -1,4 +1,5 @@
 import 'package:car_rental/constants/firestore_constants.dart';
+import 'package:car_rental/providers/firestore_provider.dart';
 import 'package:car_rental/services/car_brand_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -66,36 +67,23 @@ class Car {
         overview: map[FirestoreConstants.overview]);
   }
 
-  static Future<Car> fromMap(AsyncSnapshot<DocumentSnapshot> snapshot) async {
-    Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
 
-    CarBrandService carBrandService = CarBrandService();
-    Map<String, dynamic>? map = {};
-
-    map = await carBrandService.getDataToMap(
-        document: data[FirestoreConstants.carBrand]);
-    print("Voici enfin : ${map!["id"]}");
-
-    data[FirestoreConstants.carBrand] = map;
-
-    return Car.basicFromMap(data);
-  }
-
-  static Future<List<Car>> toList(AsyncSnapshot<QuerySnapshot> snapshot) async {
-    List<Car> carList = [];
-    for (var documentSnapshot in snapshot.data!.docs) {
-      Map<String, dynamic> data =
-          documentSnapshot.data()! as Map<String, dynamic>;
-
-      CarBrandService carBrandService = CarBrandService();
-      Map<String, dynamic>? map = {};
-      map = await carBrandService.getDataToMap(
-          document: data[FirestoreConstants.carBrand]);
-      data[FirestoreConstants.carBrand] = map;
-
-      Car car = Car.basicFromMap(data);
-      carList.add(car);
-    }
-    return carList;
-  }
+  static Car defaultCar() => Car(
+      carId: "mkQ044PKvlQkysHc2fH7",
+      carBrand: CarBrand(
+          carBrandId: "VOvGIDu0uR68F6BPDliZ",
+          carBrandImageUrl:
+              "https://firebasestorage.googleapis.com/v0/b/carrental-89ac9.appspot.com/o/carBrand%2FVOvGIDu0uR68F6BPDliZ?alt=media&token=890c6e69-61a5-47e3-8cc1-a66b12bee6f7",
+          carBrandName: "Ferrary"),
+      nbrPlaces: 5,
+      nbrStars: 4,
+      rentalPrice: 2500,
+      carSpeed: 600,
+      carImageUrl:
+          "https://firebasestorage.googleapis.com/v0/b/carrental-89ac9.appspot.com/o/car%2FmkQ044PKvlQkysHc2fH7?alt=media&token=0b4e0b03-7183-4fb4-8dec-cf592548e684",
+      carModel: "RTRS",
+      addedDate: 602,
+      isReserved: false,
+      isRented: false,
+      overview: "Voiture class, très accessible à conduire et super cool.");
 }

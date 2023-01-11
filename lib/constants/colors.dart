@@ -6,4 +6,5 @@ class ConstColors{
   static const blackColor = Colors.black;
   static const primaryColor = Colors.black;
   static const goldenColor = Color(0xFFEA890B);
+  static const greyColor = Color(0xCC383636);
 }
