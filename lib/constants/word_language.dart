@@ -30,7 +30,16 @@ class WordLanguage extends Translations {
           'car': 'Car',
           'search_cars': 'Search Cars',
           'reservation': 'Reservations',
-          'reserve_at': "Reserve"
+          'reserve_at': "Reserve",
+          'rent_now': 'Rent',
+          'to_free': 'Free',
+          'sign_up_to_customer': "Create a Customer account",
+          'identity_file': 'Identity document',
+          'profile_tof': "Profile photo",
+          'add_identity_file': "Add your ID card or your passport",
+          'add_profile_tof': "Add your profile photo",
+          'no_image': "No image",
+          'submit': "Submit"
         },
         'fr_FR': {
           'sign': 'Connectez-vous à votre compte',
@@ -59,7 +68,16 @@ class WordLanguage extends Translations {
           'car': 'Car',
           'search_cars': 'Rechercher des Voitures',
           'reservation': 'Réservations',
-          'reserve_at': 'Réservée le'
+          'reserve_at': 'Réservée le',
+          'rent_now': "Louer maintenant",
+          'to_free': 'Libérer',
+          'sign_up_to_customer': "Créer un compte client",
+          'identity_file': "Document d'identité",
+          'profile_tof': "Photo de profile",
+          'add_identity_file': "Ajoutez votre carte d'identité ou votre passport",
+          'add_profile_tof': "Ajoutez votre photo de profile",
+          'no_image': "Aucune image",
+          'submit': "Soumettre"
         }
       };
 }

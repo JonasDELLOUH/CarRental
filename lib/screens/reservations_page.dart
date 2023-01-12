@@ -51,7 +51,7 @@ class _ReservationsPageState extends State<ReservationsPage> {
                   crossAxisCount: (orientation == Orientation.portrait) ? 1 : 2,
                   childAspectRatio: 1.5),
               itemBuilder: (BuildContext context, index) {
-                return reservationCard(reservation: reservations[index]);
+                return reservationCard(reservation: reservations[index], function: (){});
               },
               itemCount: reservations.length,
             );

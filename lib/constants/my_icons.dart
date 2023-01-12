@@ -74,6 +74,22 @@ class MyIcons {
         color: color,
       );
 
+  static Icon cameraIcon(
+          {double size = 30, Color color = ConstColors.blackColor}) =>
+      Icon(
+        Icons.camera,
+        size: size,
+        color: color,
+      );
+
+  static Icon libraryAddIcon(
+          {double size = 30, Color color = ConstColors.blackColor}) =>
+      Icon(
+        Icons.library_add,
+        size: size,
+        color: color,
+      );
+
   static IconData homeIconData() => Icons.home;
 
   static IconData notificationIconData() => Icons.notifications;

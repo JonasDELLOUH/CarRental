@@ -7,12 +7,14 @@ import 'package:car_rental/screens/car_details.dart';
 import 'package:car_rental/screens/home.dart';
 import 'package:car_rental/screens/main_screen.dart';
 import 'package:car_rental/screens/sign_in.dart';
+import 'package:car_rental/screens/sign_up_as_customer.dart';
 import 'package:car_rental/screens/test.dart';
 import 'package:car_rental/services/address_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
+import 'package:intl/date_symbol_data_file.dart';
 import 'package:provider/provider.dart';
 import 'constants/colors.dart';
 import 'firebase_options.dart';
@@ -52,7 +54,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
             backgroundColor: ConstColors.backgroundColor,
-            appBarTheme:  const AppBarTheme(
+            appBarTheme: const AppBarTheme(
               backgroundColor: ConstColors.backgroundColor,
             ),
           ),

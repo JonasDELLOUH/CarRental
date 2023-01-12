@@ -105,7 +105,7 @@ class _CarDetailsState extends State<CarDetails> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  richText(text: "${widget.car.rentalPrice} cfa / ${'day'.tr}", fontSize: 15),
+                  richText(text: "${widget.car.rentalPrice*0.3} cfa / ${'day'.tr}", fontSize: 15),
                   InkWell(
                     onTap: (){
                     },

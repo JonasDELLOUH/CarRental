@@ -8,12 +8,12 @@ import 'package:get/get.dart';
 import '../constants/colors.dart';
 import '../constants/my_icons.dart';
 
-Widget reservationCard({required Reservation reservation}) {
+Widget reservationCard({required Reservation reservation, required void Function() function}) {
   return Container(
     margin: EdgeInsets.symmetric(vertical: 10),
     padding: EdgeInsets.all(10),
     decoration: BoxDecoration(
-        color: Colors.blue,
+        color: Colors.white,
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),
@@ -42,25 +42,79 @@ Widget reservationCard({required Reservation reservation}) {
                   ),
                   Row(
                     children: [
-                      MyIcons.directionsCarFilled(color: ConstColors.blueColor),
+                      MyIcons.directionsCarFilled(color: ConstColors.blueColor, size: 20),
                       richText(
                           text:
                               " ${reservation.car.nbrPlaces.toString()} places",
-                          fontSize: 15),
+                          fontSize: 20),
                     ],
                   ),
                   const SizedBox(
                     height: 2,
                   ),
+
                   richText(
                       text:
-                          "${'reserve_at'.tr} ${DateHandler.myDate(reservation.reservationDate)}", fontSize: 12)
+                          "${'reserve_at'.tr} ${DateHandler.dateFormat(reservation.reservationDate)}", fontSize: 12),
+                  SizedBox(height: 3,),
+                  InkWell(
+                    onTap: (){
+                      
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(5),
+                      // width: width * 0.45,
+                      decoration: const BoxDecoration(
+                          color: ConstColors.redColor,
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(3),
+                              topLeft: Radius.circular(3),
+                              bottomLeft: Radius.circular(3),
+                              bottomRight: Radius.circular(3))),
+                      child: Center(
+                        child: richText(
+                            text: 'to_free'.tr,
+                            color: ConstColors.backgroundColor, fontSize: 15),
+                      ),
+                    ),
+                  ),
                 ],
               )
             ],
           ),
         ),
-        Expanded(child: Row())
+        Expanded(child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                MyIcons.attachMoney(
+                    color: ConstColors.blueColor
+                ),
+                richText(text: " ${reservation.car.rentalPrice*0.7} FCFA/${"day".tr}", fontSize: 12)
+              ],
+            ),
+            InkWell(
+              onTap: function,
+              child: Container(
+                padding: const EdgeInsets.all(5),
+                // width: width * 0.45,
+                decoration: const BoxDecoration(
+                    color: ConstColors.blueColor,
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(5),
+                        topLeft: Radius.circular(5),
+                        bottomLeft: Radius.circular(5),
+                        bottomRight: Radius.circular(5))),
+                child: Center(
+                  child: richText(
+                      text: 'rent_now'.tr,
+                      color: ConstColors.backgroundColor, fontSize: 15),
+                ),
+              ),
+            )
+          ],
+        ))
       ],
     ),
   );
