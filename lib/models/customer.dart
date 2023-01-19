@@ -14,7 +14,7 @@ class Customer {
       required this.identityFileUrl,
       required this.memberImageUrl});
 
-  factory Customer.basicFromCustomer(Map<String, dynamic> map) {
+  factory Customer.basicFromMap(Map<String, dynamic> map) {
     return Customer(
         customerId: map[FirestoreConstants.id],
         member: Member.basicFromMap(map[FirestoreConstants.member]),

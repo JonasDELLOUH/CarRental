@@ -74,14 +74,6 @@ class MyIcons {
         color: color,
       );
 
-  static Icon cameraIcon(
-          {double size = 30, Color color = ConstColors.blackColor}) =>
-      Icon(
-        Icons.camera,
-        size: size,
-        color: color,
-      );
-
   static Icon libraryAddIcon(
           {double size = 30, Color color = ConstColors.blackColor}) =>
       Icon(
@@ -89,6 +81,24 @@ class MyIcons {
         size: size,
         color: color,
       );
+  static Icon cameraIcon(
+      {double size = 30, Color color = ConstColors.blackColor}) =>
+      Icon(
+        Icons.camera,
+        size: size,
+        color: color,
+      );
+  static Icon personIcon({double size = 30, Color color = ConstColors.blackColor}) =>
+      Icon(
+        Icons.person,
+        size: size,
+        color: color,
+      );
+  static IconData personIconData() => Icons.person;
+
+  static IconData languageIconData() => Icons.language;
+
+  static IconData darkModeIconData() => Icons.dark_mode;
 
   static IconData homeIconData() => Icons.home;
 

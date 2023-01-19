@@ -11,7 +11,7 @@ class CarBrandService extends BaseServices {
 
   static final firestoreInstance = FirebaseFirestore.instance;
 
-  Stream<List<CarBrand>> getCarBrands() async* {
+  Future<List<CarBrand>> getCarBrands() async {
     List<CarBrand> carBrandList = [];
     QuerySnapshot querySnapshot =
         await firestoreInstance.collection(collectionName).get();
@@ -21,6 +21,10 @@ class CarBrandService extends BaseServices {
       CarBrand carBrand = CarBrand.basicFromMap(data);
       carBrandList.add(carBrand);
     }
-    yield carBrandList;
+    return carBrandList;
   }
+
+  Stream<List<CarBrand>> getCarBrands1Stream() =>
+      Stream.periodic(const Duration(seconds: 5))
+          .asyncMap((_) => getCarBrands());
 }

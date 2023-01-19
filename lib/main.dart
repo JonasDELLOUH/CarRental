@@ -1,12 +1,15 @@
 import 'package:car_rental/constants/word_language.dart';
+import 'package:car_rental/env/links.dart';
+import 'package:car_rental/env/routing.dart';
 import 'package:car_rental/models/address.dart';
 import 'package:car_rental/models/car_brand.dart';
 import 'package:car_rental/providers/auth_provider.dart';
+import 'package:car_rental/providers/customer_provider.dart';
 import 'package:car_rental/providers/firestore_provider.dart';
-import 'package:car_rental/screens/car_details.dart';
-import 'package:car_rental/screens/home.dart';
-import 'package:car_rental/screens/main_screen.dart';
-import 'package:car_rental/screens/sign_in.dart';
+import 'package:car_rental/screens/car_details/car_details.dart';
+import 'package:car_rental/screens/home/home.dart';
+import 'package:car_rental/screens/main/main_screen.dart';
+import 'package:car_rental/screens/sign_in/sign_in.dart';
 import 'package:car_rental/screens/sign_up_as_customer.dart';
 import 'package:car_rental/screens/test.dart';
 import 'package:car_rental/services/address_services.dart';
@@ -26,14 +29,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   // Locale myLocale = Localizations.localeOf(context);
-  runApp(GetMaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: const MyApp(),
-    translations: WordLanguage(),
-    locale: const Locale('fr', 'FR'),
-    // locale: Localizations.localeOf(context),
-    fallbackLocale: const Locale('en', 'US'),
-  ));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -46,20 +42,32 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (_) => AuthProvider()),
           ChangeNotifierProvider(create: (_) => WhatPageProvider()),
-          ChangeNotifierProvider(create: (_) => FirestoreProvider())
+          ChangeNotifierProvider(create: (_) => FirestoreProvider()),
+          ChangeNotifierProvider(create: (_) => CustomerProvider())
         ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            backgroundColor: ConstColors.backgroundColor,
-            appBarTheme: const AppBarTheme(
-              backgroundColor: ConstColors.backgroundColor,
-            ),
-          ),
-          home: const MainScreen(),
-        ));
+        // child: MaterialApp(
+        //   debugShowCheckedModeBanner: false,
+        //   title: 'Flutter Demo',
+        //   theme: ThemeData(
+        //     primarySwatch: Colors.blue,
+        //     backgroundColor: ConstColors.backgroundColor,
+        //     appBarTheme: const AppBarTheme(
+        //       backgroundColor: ConstColors.backgroundColor,
+        //     ),
+        //   ),
+        //   home: const MainScreen(),
+        // )
+      child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        // home: const MyApp(),
+        translations: WordLanguage(),
+        locale: const Locale('fr', 'FR'),
+        initialRoute: AppLinks.splash2Screen,
+        getPages: AppRouting.ROUTES,
+        // locale: Localizations.localeOf(context),
+        fallbackLocale: const Locale('en', 'US'),
+      ),
+    );
   }
 }
 

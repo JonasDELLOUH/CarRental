@@ -71,7 +71,7 @@ class _SignUpAsCustomerState extends State<SignUpAsCustomer> {
                   textAlign: TextAlign.right,
                   fontSize: 15,
                   fontWeight: FontWeight.w500),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
@@ -89,7 +89,7 @@ class _SignUpAsCustomerState extends State<SignUpAsCustomer> {
                       child: MyIcons.libraryAddIcon(color: ConstColors.whiteColor))
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Container(

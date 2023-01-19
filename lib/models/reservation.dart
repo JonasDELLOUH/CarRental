@@ -27,7 +27,7 @@ class Reservation {
   factory Reservation.basicFromMap(Map<String, dynamic> map) {
     return Reservation(
         reservationId: map[FirestoreConstants.id],
-        customer: Customer.basicFromCustomer(map[FirestoreConstants.customer]),
+        customer: Customer.basicFromMap(map[FirestoreConstants.customer]),
         car: Car.basicFromMap(map[FirestoreConstants.car]),
         reservationDate: map[FirestoreConstants.reservationDate]);
   }

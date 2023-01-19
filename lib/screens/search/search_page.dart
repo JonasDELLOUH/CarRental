@@ -1,13 +1,12 @@
-import 'package:car_rental/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wp_search_bar/wp_search_bar.dart';
 
-import '../constants/my_icons.dart';
-import '../models/car.dart';
-import '../services/car_services.dart';
-import '../utility/car_card.dart';
-import 'car_details.dart';
+import '../../constants/my_icons.dart';
+import '../../models/car.dart';
+import '../../services/car_services.dart';
+import '../../utility/car_card.dart';
+import '../car_details/car_details.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -35,9 +34,9 @@ class _SearchPageState extends State<SearchPage> {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: WPSearchBar(
-        iconTheme: const IconThemeData(color: ConstColors.blueColor),
-        appBarForegroundColor: ConstColors.blueColor,
-        appBarBackgroundColor: ConstColors.backgroundColor,
+        // iconTheme: const IconThemeData(color: ConstColors.blueColor),
+        // appBarForegroundColor: ConstColors.blueColor,
+        // appBarBackgroundColor: ConstColors.backgroundColor,
         listOfFilters: {
           'model': {
             'name': 'model',
@@ -102,14 +101,14 @@ class _SearchPageState extends State<SearchPage> {
           child: StreamBuilder<List<Car>>(
             // stream: carServices.getCollectionStream(),
             stream: choice == 1
-                ? carServices.getCarsWithFilter(model: values)
+                ? carServices.getCarsWithFilterStream(model: values)
                 : choice == 2
-                    ? carServices.getCarsWithFilter(brand: values)
+                    ? carServices.getCarsWithFilterStream(brand: values)
                     : choice == 3
-                        ? carServices.getCarsWithFilter(places: values)
+                        ? carServices.getCarsWithFilterStream(places: values)
                         : choice == 4
-                            ? carServices.getCarsWithFilter(price: values)
-                            : carServices.getCars(),
+                            ? carServices.getCarsWithFilterStream(price: values)
+                            : carServices.getCarsStream(),
             builder: (BuildContext context, AsyncSnapshot<List<Car>> snapshot) {
               if (snapshot.hasError) {
                 return const Text('Something went wrong');

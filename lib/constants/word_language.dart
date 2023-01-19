@@ -39,7 +39,14 @@ class WordLanguage extends Translations {
           'add_identity_file': "Add your ID card or your passport",
           'add_profile_tof': "Add your profile photo",
           'no_image': "No image",
-          'submit': "Submit"
+          'submit': "Submit",
+          'settings': 'Settings',
+          'account': 'Account',
+          'account_description': 'Log out, Edit account',
+          'app_language': 'App Language',
+          'app_language_description': "Change the app language",
+          'dark_mode': "Dark mode",
+          'dark_mode_description': "Change on darkMode"
         },
         'fr_FR': {
           'sign': 'Connectez-vous à votre compte',
@@ -74,10 +81,19 @@ class WordLanguage extends Translations {
           'sign_up_to_customer': "Créer un compte client",
           'identity_file': "Document d'identité",
           'profile_tof': "Photo de profile",
-          'add_identity_file': "Ajoutez votre carte d'identité ou votre passport",
+          'add_identity_file':
+              "Ajoutez votre carte d'identité ou votre passport",
           'add_profile_tof': "Ajoutez votre photo de profile",
           'no_image': "Aucune image",
-          'submit': "Soumettre"
+          'submit': "Soumettre",
+          'settings': 'Parametre',
+          'account': 'Compte',
+          'account_description':
+              'Se déconnecter, Changer les informations de son compte',
+          'app_language': 'Langues',
+          'app_language_description': "Changer la langue de l'application",
+          'dark_mode': "Mode foncée",
+          'dark_mode_description': "Changer en  mode foncée"
         }
       };
 }

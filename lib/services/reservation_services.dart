@@ -16,8 +16,8 @@ class ReservationServices extends BaseServices {
 
   static final firestoreInstance = FirebaseFirestore.instance;
 
-  Stream<List<Reservation>> getReservations(
-      {required String customerId}) async* {
+  Future<List<Reservation>> getReservations(
+      {required String customerId}) async {
     List<Reservation> reservationList = [];
     QuerySnapshot querySnapshot;
     if (customerId.isNotEmpty) {
@@ -47,9 +47,11 @@ class ReservationServices extends BaseServices {
       map2 = await customerServices.getDataToMap(
           document: data[FirestoreConstants.customer]);
 
-      map3 = await memberServices.getDataToMap(document: map2![FirestoreConstants.member]);
+      map3 = await memberServices.getDataToMap(
+          document: map2![FirestoreConstants.member]);
 
-      map4 = await carBrandService.getDataToMap(document: map1![FirestoreConstants.carBrand]);
+      map4 = await carBrandService.getDataToMap(
+          document: map1![FirestoreConstants.carBrand]);
 
       map1[FirestoreConstants.carBrand] = map4;
       map2[FirestoreConstants.member] = map3;
@@ -58,6 +60,12 @@ class ReservationServices extends BaseServices {
       Reservation reservation = Reservation.basicFromMap(data);
       reservationList.add(reservation);
     }
-    yield reservationList;
+
+    return reservationList;
   }
+
+  Stream<List<Reservation>> getReservationsStream(
+          {required String customerId}) =>
+      Stream.periodic(const Duration(seconds: 5))
+          .asyncMap((_) => getReservations(customerId: customerId));
 }

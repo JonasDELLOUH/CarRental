@@ -1,9 +1,10 @@
 import 'package:car_rental/constants/colors.dart';
 import 'package:car_rental/constants/my_icons.dart';
+import 'package:car_rental/controllers/splash2_controller.dart';
 import 'package:car_rental/models/car_brand.dart';
 import 'package:car_rental/providers/firestore_provider.dart';
-import 'package:car_rental/screens/car_details.dart';
-import 'package:car_rental/screens/search_page.dart';
+import 'package:car_rental/screens/car_details/car_details.dart';
+import 'package:car_rental/screens/search/search_page.dart';
 import 'package:car_rental/services/car_brand_services.dart';
 import 'package:car_rental/services/car_services.dart';
 import 'package:car_rental/utility/car_brand_card.dart';
@@ -14,7 +15,8 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-import '../models/car.dart';
+import '../../controllers/main_controller.dart';
+import '../../models/car.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -26,6 +28,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   CarServices carServices = CarServices();
   CarBrandService carBrandService = CarBrandService();
+  final Splash2Controller _splash2Controller = Get.find();
   Car? car;
   List<Car> cars = [];
   List<CarBrand> carBrands = [];
@@ -37,7 +40,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    FirestoreProvider firestorePro = Provider.of<FirestoreProvider>(context);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     final orientation = MediaQuery.of(context).orientation;
@@ -56,12 +58,12 @@ class _HomeState extends State<Home> {
                 padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
                     color: ConstColors.backgroundColor,
-                    borderRadius:
-                        const BorderRadius.vertical(bottom: Radius.circular(25)),
+                    borderRadius: const BorderRadius.vertical(
+                        bottom: Radius.circular(25)),
                     boxShadow: [
                       BoxShadow(
                         color: ConstColors.primaryColor.withOpacity(0.3),
-                        offset: Offset(0.0, 3.0),
+                        offset: const Offset(0.0, 3.0),
                         blurRadius: 1,
                       ),
                     ]),
@@ -90,7 +92,10 @@ class _HomeState extends State<Home> {
                       ),
                       child: InkWell(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => SearchPage()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SearchPage()));
                         },
                         child: Row(
                           children: [
@@ -118,43 +123,31 @@ class _HomeState extends State<Home> {
               Container(
                 height: height * 0.09,
                 child: StreamBuilder<List<CarBrand>>(
-                  stream: carBrandService.getCarBrands(),
+                  stream: carBrandService.getCarBrands1Stream(),
                   builder: (BuildContext context,
                       AsyncSnapshot<List<CarBrand>> snapshot) {
                     if (snapshot.hasError) {
                       return const Text('Something went wrong');
                     }
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Text("Loading");
+                      return carBrandsView(
+                          context: context,
+                          carBrands:
+                              _splash2Controller.defaultCarBrandList.value!);
                     }
                     if (snapshot.hasData) {}
 
                     carBrands = snapshot.data!;
-                    return VxSwiper.builder(
-                      itemCount: carBrands.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        // print("Les categories : ${jobCategories}");
-                        return CarBrandCard(
-                            carBrand: carBrands[index], height: height * 0.1);
-                      },
-                      height: height * 0.1,
-                      viewportFraction: 0.2,
-                      autoPlay: true,
-                      autoPlayAnimationDuration: 3.seconds,
-                      autoPlayCurve: Curves.linear,
-                      enableInfiniteScroll: true,
-                    );
+                    return carBrandsView(
+                        context: context, carBrands: carBrands);
                   },
                 ),
               ),
               Container(
                 height: height * 0.51,
                 // color: Colors.blue,
-                child: firestorePro.firestoreStatus == FirestoreStatus.getting
-                    ? const CircularProgressIndicator()
-                    : StreamBuilder<List<Car>>(
-                        // stream: carServices.getCollectionStream(),
-                        stream: carServices.getCars(),
+                child: StreamBuilder<List<Car>>(
+                        stream: carServices.getCarsStream(),
                         builder: (BuildContext context,
                             AsyncSnapshot<List<Car>> snapshot) {
                           if (snapshot.hasError) {
@@ -163,34 +156,13 @@ class _HomeState extends State<Home> {
 
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return const Text("Loading");
+                            return carsView(
+                                context: context,
+                                carList: _splash2Controller.defaultCarList.value!);
                           }
                           if (snapshot.hasData) {}
                           cars = snapshot.data!;
-                          print(firestorePro.firestoreStatus);
-                          return GridView.builder(
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount:
-                                        (orientation == Orientation.portrait)
-                                            ? 2
-                                            : 3,
-                                    childAspectRatio: 0.75),
-                            itemBuilder: (BuildContext context, index) {
-                              return CarCard(
-                                  car: cars[index],
-                                  height: height * 0.51,
-                                  function: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                CarDetails(car: cars[index])));
-                                  });
-                            },
-                            itemCount: cars.length,
-                            shrinkWrap: true,
-                          );
+                          return carsView(context: context, carList: cars);
                         },
                       ),
               )
@@ -198,6 +170,49 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget carsView({required BuildContext context, required List<Car> carList}) {
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount:
+              (MediaQuery.of(context).orientation == Orientation.portrait)
+                  ? 2
+                  : 3,
+          childAspectRatio: 0.75),
+      itemBuilder: (BuildContext context, index) {
+        return CarCard(
+            car: carList[index],
+            height: MediaQuery.of(context).size.height * 0.51,
+            function: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CarDetails(car: carList[index])));
+            });
+      },
+      itemCount: carList.length,
+      shrinkWrap: true,
+    );
+  }
+
+  Widget carBrandsView(
+      {required BuildContext context, required List<CarBrand> carBrands}) {
+    return VxSwiper.builder(
+      itemCount: carBrands.length,
+      itemBuilder: (BuildContext context, int index) {
+        // print("Les categories : ${jobCategories}");
+        return CarBrandCard(
+            carBrand: carBrands[index],
+            height: MediaQuery.of(context).size.height * 0.1);
+      },
+      height: MediaQuery.of(context).size.height * 0.1,
+      viewportFraction: 0.2,
+      autoPlay: true,
+      autoPlayAnimationDuration: 3.seconds,
+      autoPlayCurve: Curves.linear,
+      enableInfiniteScroll: true,
     );
   }
 }

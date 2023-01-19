@@ -34,4 +34,6 @@ class Member {
       email: "jdellouh1@gmail.com",
       phoneNumber: "96133525",
       fullName: "DELLOUH Jonas");
+
+
 }

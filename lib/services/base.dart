@@ -20,7 +20,8 @@ abstract class BaseServices {
     return urlString;
   }
 
-  Future<void> addToFirebase(Map<String, dynamic> map, {File? file, File? file2, File? file3, File? file4}) async {
+  Future<void> addToFirebase(Map<String, dynamic> map,
+      {File? file, File? file2, File? file3, File? file4}) async {
     try {
       final document = firestoreInstance.collection(collectionName).doc();
       map[FirestoreConstants.id] = document.id;
@@ -29,17 +30,17 @@ abstract class BaseServices {
         final urlString = await addImageToStorage(ref, file);
         map[FirestoreConstants.imageUrl] = urlString;
       }
-      if(file2 != null) {
+      if (file2 != null) {
         final ref = storageRef.child(collectionName).child(document.id);
         final urlString = await addImageToStorage(ref, file2);
         map[FirestoreConstants.imageUrl2] = urlString;
       }
-      if(file3 != null) {
+      if (file3 != null) {
         final ref = storageRef.child(collectionName).child(document.id);
         final urlString = await addImageToStorage(ref, file3);
         map[FirestoreConstants.imageUrl3] = urlString;
       }
-      if(file4 != null) {
+      if (file4 != null) {
         final ref = storageRef.child(collectionName).child(document.id);
         final urlString = await addImageToStorage(ref, file4);
         map[FirestoreConstants.imageUrl4] = urlString;
@@ -68,19 +69,33 @@ abstract class BaseServices {
     }
   }
 
-  Future<Map<String, dynamic>?> getDataToMap({required String document}) async {
+  Future<Map<String, dynamic>?> getDataToMap(
+      {String document = "",
+      String whereId = "",
+      String whereField = ""}) async {
     Map<String, dynamic> map = {};
-    DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
-        .collection(collectionName)
-        .doc(document)
-        .get();
-    if (documentSnapshot.exists) {
-      map = documentSnapshot.data() as Map<String, dynamic>;
-      print('Document data: ${documentSnapshot.data()}');
+    DocumentSnapshot documentSnapshot;
+    if (whereField.isNotEmpty && whereId.isNotEmpty) {
+      QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirebaseFirestore.instance
+          .collection(collectionName)
+          .where(whereField, isEqualTo: whereId)
+          .get();
+     map = querySnapshot.docs.first.data();
       return map;
     } else {
-      print('Document does not exist on the database');
-      return null;
+      documentSnapshot = await FirebaseFirestore.instance
+          .collection(collectionName)
+          .doc(document)
+          .get();
+
+      if (documentSnapshot.exists) {
+        map = documentSnapshot.data() as Map<String, dynamic>;
+        print('Document data: ${documentSnapshot.data()}');
+        return map;
+      } else {
+        print('Document does not exist on the database');
+        return null;
+      }
     }
   }
 

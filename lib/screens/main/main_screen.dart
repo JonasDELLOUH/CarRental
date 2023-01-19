@@ -1,14 +1,14 @@
 import 'package:car_rental/constants/colors.dart';
-import 'package:car_rental/screens/notifications_page.dart';
-import 'package:car_rental/screens/reservations_page.dart';
-import 'package:car_rental/screens/setings_page.dart';
+import 'package:car_rental/screens/notifications/notifications_page.dart';
+import 'package:car_rental/screens/reservations/reservations_page.dart';
 import 'package:car_rental/widgets/bar_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../constants/my_icons.dart';
-import '../models/customer.dart';
-import 'home.dart';
+import '../../constants/my_icons.dart';
+import '../../models/customer.dart';
+import '../../models/member.dart';
+import '../home/home.dart';
+import '../settings/settings.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -31,7 +31,7 @@ class _MainScreenState extends State<MainScreen> {
           : whatPageProvider.whatPageStatus == WhatPageStatus.notification
               ? const NotificationsPage()
               : whatPageProvider.whatPageStatus == WhatPageStatus.setting
-                  ? const SettingsPage()
+                  ? Settings(member: Member.defaultMember())
                   : whatPageProvider.whatPageStatus ==
                           WhatPageStatus.reservation
                       ? ReservationsPage(

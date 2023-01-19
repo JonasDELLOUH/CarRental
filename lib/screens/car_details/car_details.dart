@@ -5,9 +5,9 @@ import 'package:car_rental/widgets/text_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../constants/my_icons.dart';
-import '../models/car.dart';
-import '../utility/car_card.dart';
+import '../../constants/my_icons.dart';
+import '../../models/car.dart';
+import '../../utility/car_card.dart';
 
 class CarDetails extends StatefulWidget {
   final Car car;
