@@ -1,22 +1,16 @@
 import 'dart:io';
+import 'package:car_rental/presentation/sign_up_as_customer/sign_up_as_customer_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../core/constants/colors.dart';
-import '../core/constants/my_icons.dart';
-import '../core/widgets/text_widgets.dart';
+import '../../../core/constants/colors.dart';
+import '../../../core/constants/my_icons.dart';
+import '../../../core/widgets/text_widgets.dart';
 
-class SignUpAsCustomer extends StatefulWidget {
-  const SignUpAsCustomer({Key? key}) : super(key: key);
-
-  @override
-  State<SignUpAsCustomer> createState() => _SignUpAsCustomerState();
-}
-
-class _SignUpAsCustomerState extends State<SignUpAsCustomer> {
-  File? _identityFile;
-  File? _memberImage;
+class SignUpAsCustomerScreen extends StatelessWidget {
+  SignUpAsCustomerScreen({Key? key}) : super(key: key);
+  final controller = Get.find<SignUpAsCustomerController>();
 
   @override
   Widget build(BuildContext context) {
@@ -57,9 +51,11 @@ class _SignUpAsCustomerState extends State<SignUpAsCustomer> {
                   // takeFile();
                 },
                 child: Card(
-                  child: _identityFile == null
-                      ? richText(text: 'add_identity_file'.tr)
-                      : richText(text: _identityFile!.path),
+                  child: Obx(
+                    () => controller.identityFile.value == null
+                        ? richText(text: 'add_identity_file'.tr)
+                        : richText(text: controller.identityFile.value!.path),
+                  ),
                 ),
               ),
               const SizedBox(
@@ -92,18 +88,20 @@ class _SignUpAsCustomerState extends State<SignUpAsCustomer> {
               const SizedBox(
                 height: 10,
               ),
-              Container(
+              SizedBox(
                 height: height * 0.2,
                 child: Center(
-                  child: _memberImage != null
-                      ? ClipRRect(
-                          borderRadius: const BorderRadius.only(
-                              topRight: Radius.circular(8),
-                              topLeft: Radius.circular(8),
-                              bottomLeft: Radius.circular(8),
-                              bottomRight: Radius.circular(8)),
-                          child: Image.file(_memberImage!))
-                      : richText(text: 'no_image'.tr),
+                  child: Obx(()
+                    => controller.memberImage.value != null
+                        ? ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                                topRight: Radius.circular(8),
+                                topLeft: Radius.circular(8),
+                                bottomLeft: Radius.circular(8),
+                                bottomRight: Radius.circular(8)),
+                            child: Image.file(controller.memberImage.value!))
+                        : richText(text: 'no_image'.tr),
+                  ),
                 ),
               ),
               const SizedBox(
@@ -139,10 +137,9 @@ class _SignUpAsCustomerState extends State<SignUpAsCustomer> {
     final imagePath = await ImagePicker()
         .pickImage(source: source, maxHeight: 500, maxWidth: 500);
     final file = File(imagePath!.path);
-    setState(() {
-      _memberImage = file;
-    });
+    controller.memberImage.value = file;
   }
+
 
 // takeFile() async {
 //   final result = await FilePicker.platform.pickFiles(allowMultiple: false);

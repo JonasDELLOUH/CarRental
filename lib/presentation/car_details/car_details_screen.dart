@@ -1,3 +1,4 @@
+import 'package:car_rental/presentation/car_details/car_details_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,16 +10,11 @@ import '../../core/utility/car_card.dart';
 import '../../core/widgets/read_more.dart';
 import '../../core/widgets/text_widgets.dart';
 
-class CarDetails extends StatefulWidget {
-  final Car car;
+class CarDetailsScreen extends StatelessWidget {
+  CarDetailsScreen({Key? key, Car? car}) : super(key: key);
 
-  const CarDetails({Key? key, required this.car}) : super(key: key);
+  final controller = Get.find<CarDetailsController>();
 
-  @override
-  State<CarDetails> createState() => _CarDetailsState();
-}
-
-class _CarDetailsState extends State<CarDetails> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -28,7 +24,7 @@ class _CarDetailsState extends State<CarDetails> {
       appBar: AppBar(
         leading: IconButton(
           icon: MyIcons.leadingIcon(),
-          onPressed: (){
+          onPressed: () {
             Navigator.pop(context);
           },
         ),
@@ -41,15 +37,14 @@ class _CarDetailsState extends State<CarDetails> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               richText(
-                  text:
-                      "${widget.car.carBrand.carBrandName} ${widget.car.carModel}",
+                  text: "${controller.car.value!.carBrand.carBrandName} ${controller.car.value!.carModel}",
                   fontSize: 25,
                   fontWeight: FontWeight.w600),
               const SizedBox(
                 height: 5,
               ),
               Row(
-                children: stars(widget.car.nbrStars, size: 25),
+                children: stars(controller.car.value!.nbrStars, size: 25),
               ),
               const SizedBox(
                 height: 5,
@@ -61,7 +56,7 @@ class _CarDetailsState extends State<CarDetails> {
                     topRight: Radius.circular(20),
                     topLeft: Radius.circular(20)),
                 child: Image.network(
-                  widget.car.carImageUrl,
+                  controller.car.value!.carImageUrl,
                   height: width * 0.7,
                   width: width,
                   fit: BoxFit.cover,
@@ -74,7 +69,7 @@ class _CarDetailsState extends State<CarDetails> {
               const SizedBox(
                 height: 5,
               ),
-              readmore(text: widget.car.overview),
+              readmore(text: controller.car.value!.overview),
               const SizedBox(
                 height: 5,
               ),
@@ -82,18 +77,16 @@ class _CarDetailsState extends State<CarDetails> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   CarCaracCard(
-                      carac: "${widget.car.carSpeed} km/h",
+                      carac: "${controller.car.value!.carSpeed} km/h",
                       caracIconData: MyIcons.speedIconData(),
                       width: width * 0.15),
                   CarCaracCard(
-                      carac: "${widget.car.nbrPlaces} ${'seats'.tr}",
+                      carac: "${controller.car.value!.nbrPlaces} ${'seats'.tr}",
                       caracIconData: MyIcons.seatIconData(),
                       width: width * 0.15),
                   CarCaracCard(
-                      carac: widget.car.isReserved
-                          ? 'reserved'.tr
-                          : 'available'.tr,
-                      caracIconData: widget.car.isReserved
+                      carac: controller.car.value!.isReserved ? 'reserved'.tr : 'available'.tr,
+                      caracIconData: controller.car.value!.isReserved
                           ? MyIcons.reserveIconData()
                           : MyIcons.availableIconData(),
                       width: width * 0.15)
@@ -105,9 +98,12 @@ class _CarDetailsState extends State<CarDetails> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  richText(text: "${widget.car.rentalPrice*0.3} cfa / ${'day'.tr}", fontSize: 15),
+                  richText(
+                      text: "${controller.car.value!.rentalPrice * 0.3} cfa / ${'day'.tr}",
+                      fontSize: 15),
                   InkWell(
-                    onTap: (){
+                    onTap: () {
+                      controller.redirectToPay();
                     },
                     child: Container(
                       padding: const EdgeInsets.all(5),

@@ -6,7 +6,7 @@ import '../../core/constants/my_icons.dart';
 import '../../core/models/car.dart';
 import '../../core/services/car_services.dart';
 import '../../core/utility/car_card.dart';
-import '../car_details/car_details.dart';
+import '../car_details/car_details_screen.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -133,7 +133,7 @@ class _SearchPageState extends State<SearchPage> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    CarDetails(car: cars[index])));
+                                    CarDetailsScreen(car: cars[index])));
                       });
                 },
                 itemCount: cars.length,

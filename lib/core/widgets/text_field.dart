@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-Widget textField({
-  required TextEditingController controller, TextInputType textInputType = TextInputType.text, String hintText = ""
-}) {
+Widget textField(
+    {required TextEditingController controller,
+    TextInputType textInputType = TextInputType.text,
+    String hintText = "", String? Function(String?)? validator}) {
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 15),
     decoration: BoxDecoration(
@@ -12,10 +14,8 @@ Widget textField({
     child: TextFormField(
       controller: controller,
       keyboardType: textInputType,
-      decoration: InputDecoration(
-        border: InputBorder.none,
-        hintText: hintText
-      ),
+      validator: validator,
+      decoration: InputDecoration(border: InputBorder.none, hintText: hintText),
     ),
   );
 }

@@ -39,7 +39,7 @@ class CarServices extends BaseServices {
   }
 
   @override
-  Future<List> getCollectionToMap() async {
+  Future<List> getCollectionToMap({String fieldName = "", dynamic value}) async {
     CarBrandService carBrandService = CarBrandService();
     List l = await super.getCollectionToMap();
     for (dynamic car in l) {
@@ -53,9 +53,9 @@ class CarServices extends BaseServices {
   @override
   Future<Map<String, dynamic>?> getDocumentToMap(
       {String document = "",
-        String whereId = "",
+        String whereValue = "",
         String whereField = ""}) async {
-    Map<String, dynamic>? map = await super.getDocumentToMap(document: document, whereId: whereId, whereField: whereField);
+    Map<String, dynamic>? map = await super.getDocumentToMap(document: document, whereValue: whereValue, whereField: whereField);
     if(map != null || map!.isNotEmpty){
       CarBrandService carBrandService = CarBrandService();
       Map<String, dynamic>? map2 =

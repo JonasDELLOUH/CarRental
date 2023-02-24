@@ -70,16 +70,16 @@ abstract class BaseServices {
 
   Future<Map<String, dynamic>?> getDocumentToMap(
       {String document = "",
-      String whereId = "",
+      String whereValue = "",
       String whereField = ""}) async {
     Map<String, dynamic> map = {};
     DocumentSnapshot documentSnapshot;
-    if (whereField.isNotEmpty && whereId.isNotEmpty) {
+    if (whereField.isNotEmpty && whereValue.isNotEmpty) {
       try {
         QuerySnapshot<Map<String, dynamic>> querySnapshot =
             await FirebaseFirestore.instance
                 .collection(collectionName)
-                .where(whereField, isEqualTo: whereId)
+                .where(whereField, isEqualTo: whereValue)
                 .get();
         map = querySnapshot.docs.first.data();
       } catch (e, strace) {
@@ -115,12 +115,21 @@ abstract class BaseServices {
   //   }).toList();
   // }
 
-  Future<List> getCollectionToMap() async {
+  Future<List> getCollectionToMap(
+      {String fieldName = "", dynamic value}) async {
     List datas = [];
     QuerySnapshot querySnapshot;
     try {
-      QuerySnapshot querySnapshot =
-          await FirebaseFirestore.instance.collection(collectionName).get();
+      if (fieldName.isNotEmpty) {
+        querySnapshot = await FirebaseFirestore.instance
+            .collection(collectionName)
+            .where(fieldName, isEqualTo: value)
+            .get();
+      } else {
+        querySnapshot =
+            await FirebaseFirestore.instance.collection(collectionName).get();
+      }
+
       for (final DocumentSnapshot documentSnapshot in querySnapshot.docs) {
         datas.add(documentSnapshot.data() as Map<String, dynamic>);
       }
@@ -129,6 +138,39 @@ abstract class BaseServices {
       print("his strace : $strace");
     }
     return datas;
+  }
+
+  Future<void> addToFirebaseWithId(Map<String, dynamic> map, String id,
+      {File? file, File? file2, File? file3, File? file4}) async {
+    try {
+      DocumentReference document =
+          firestoreInstance.collection(collectionName).doc(id);
+      map[FirestoreConstants.id] = id;
+      if (file != null) {
+        final ref = storageRef.child(collectionName).child(document.id);
+        final urlString = await addImageToStorage(ref, file);
+        map[FirestoreConstants.imageUrl] = urlString;
+      }
+      if (file2 != null) {
+        final ref = storageRef.child(collectionName).child(document.id);
+        final urlString = await addImageToStorage(ref, file2);
+        map[FirestoreConstants.imageUrl2] = urlString;
+      }
+      if (file3 != null) {
+        final ref = storageRef.child(collectionName).child(document.id);
+        final urlString = await addImageToStorage(ref, file3);
+        map[FirestoreConstants.imageUrl3] = urlString;
+      }
+      if (file4 != null) {
+        final ref = storageRef.child(collectionName).child(document.id);
+        final urlString = await addImageToStorage(ref, file4);
+        map[FirestoreConstants.imageUrl4] = urlString;
+      }
+      await document.set(map);
+    } catch (e, strace) {
+      print(e);
+      print(strace);
+    }
   }
 
   Stream<QuerySnapshot> getCollectionStream() {
@@ -144,5 +186,25 @@ abstract class BaseServices {
         .doc(documentId)
         .snapshots();
     return collectionStream;
+  }
+
+  Future<bool> isExist(String fieldName, dynamic value) async {
+    bool exists = false;
+    try {
+      final QuerySnapshot<Map<String, dynamic>> result = await FirebaseFirestore
+          .instance
+          .collection(collectionName)
+          .where(fieldName, isEqualTo: value)
+          .limit(1)
+          .get();
+      if (result.docs.isNotEmpty) {
+        exists = true;
+      }
+    } catch (e, strace) {
+      print("Voici l'erreur : $e");
+      print("Voici le strace : $strace");
+    }
+
+    return exists;
   }
 }

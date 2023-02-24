@@ -5,12 +5,15 @@ class WordLanguage extends Translations {
   Map<String, Map<String, String>> get keys => {
         'en_US': {
           'sign': 'Sign in to Account',
+          'sign_up_label': "Create an account",
           'phone_number': 'Mobile Number',
           'password': 'Password',
-          'email':  'Email',
+          'email': 'Email',
+          'fullName': "FullName",
           'forget_password': 'Forget Password',
           'sign_in': 'Sign in',
           'sign_up': 'Sign up',
+          'sign_up_ok': "Account created successfully",
           'have_not_account': "Don't have an account? ",
           'sign_in_google': 'Sign in with Google',
           'login_success': 'Login success',
@@ -48,15 +51,29 @@ class WordLanguage extends Translations {
           'app_language_description': "Change the app language",
           'dark_mode': "Dark mode",
           'dark_mode_description': "Change on darkMode",
+          'field_must_be_filled': "This field must be filled",
+          'enter_valid_mail': "Please enter a valide email",
+          'weak_password': "The password is weak",
+          'email_already_in_use':
+              "An account already exists for this email address",
+          'failed': "Failed",
+          'succeeded': "Succeeded",
+          'network_request_failed':
+              "Impossible to connect. Please check your internet connection",
+          'user_not_found': "No user found for this email",
+          'wrong_password': "Incorrect password for this user"
         },
         'fr_FR': {
           'sign': 'Connectez-vous à votre compte',
+          'sign_up_label': "Créer un compte",
           'phone_number': 'Numéro de téléphone',
-          'email':  'Email',
+          'email': 'Email',
+          'fullName': "Nom Complet",
           'password': 'Mot de passe',
           'forget_password': 'Mot de passe oublié',
           'sign_in': 'Se connecter',
           'sign_up': "S'inscrire",
+          'sign_up_ok': "Compte créé avec succès",
           'have_not_account': "Vous n'avez pas un compte? ",
           'sign_in_google': 'Se connecter avec Google',
           'login_success': 'Authentification réussie',
@@ -95,7 +112,18 @@ class WordLanguage extends Translations {
           'app_language': 'Langues',
           'app_language_description': "Changer la langue de l'application",
           'dark_mode': "Mode foncée",
-          'dark_mode_description': "Changer en  mode foncée"
+          'dark_mode_description': "Changer en  mode foncée",
+          'field_must_be_filled': "Ce champs doit être rempli",
+          'enter_valid_mail': "Veuillez mettre un email valide",
+          'weak_password': "Le mot de pass est faible",
+          'email_already_in_use':
+              "Un compte existe déjà pour cette adresse e-mail",
+          'failed': "Échoué",
+          'succeeded': "Réussi",
+          'network_request_failed':
+              "Impossible de se connecter. Veuillez vérifier votre connexion Internet",
+          'user_not_found': "Aucun utilisateur trouvé pour cet e-mail",
+          'wrong_password': "Mot de passe incorrect pour cet utilisateur"
         }
       };
 }

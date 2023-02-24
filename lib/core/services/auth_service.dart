@@ -1,3 +1,5 @@
+import 'package:car_rental/core/constants/firestore_constants.dart';
+import 'package:car_rental/core/services/member_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -9,6 +11,7 @@ import '../utility/show_otp_dialog.dart';
 class AuthService {
   final _authInstance = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  MemberServices memberServices = MemberServices();
 
   User get user => _authInstance.currentUser!;
 
@@ -18,29 +21,29 @@ class AuthService {
         email: mail, password: pwd);
     final User? user = userCredential.user;
 
-    return user!.refreshToken;
+    return user!.uid;
   }
 
   //Création user
   Future<String?> createUser(
-      String mail, String pwd, String name, String surname) async {
+      {required String email,
+      required String password,
+      required String fullName,
+      required String phoneNumber}) async {
     final userCredential = await _authInstance.createUserWithEmailAndPassword(
-        email: mail, password: pwd);
+        email: email, password: password);
     final User? user = userCredential.user;
     if (user != null) {
-      // Map<String, dynamic>memberMap = {
-      //   nameKey: name,
-      //   surnameKey: surname,
-      //   imageUrlKey: "",
-      //   followersKey: [user.uid],
-      //   followingKey: [],
-      //   uidKey: user.uid
-      // };
-      // //AddUser;
-      // addUserToFirebase(memberMap);
+      Map<String, dynamic> map = {
+        FirestoreConstants.memberFullName: fullName,
+        FirestoreConstants.memberEmail: userCredential.user!.email ?? "",
+        FirestoreConstants.memberPhoneNumber: phoneNumber,
+        FirestoreConstants.id: userCredential.user!.uid,
+      };
+      memberServices.addToFirebaseWithId(map, userCredential.user!.uid);
     }
 
-    return user!.refreshToken;
+    return user!.uid;
   }
 
   Future<String?> signInWithGoogle() async {
@@ -53,9 +56,20 @@ class AuthService {
         accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
     final UserCredential userCredential =
         await _authInstance.signInWithCredential(credential);
-    final user = userCredential.additionalUserInfo;
-    if (user!.isNewUser) {}
-    return userCredential.user!.refreshToken;
+    final AdditionalUserInfo? additionalUserInfo =
+        userCredential.additionalUserInfo;
+    if (additionalUserInfo!.isNewUser) {
+      Map<String, dynamic> map = {
+        FirestoreConstants.memberFullName:
+            userCredential.user!.displayName ?? "",
+        FirestoreConstants.memberEmail: userCredential.user!.email ?? "",
+        FirestoreConstants.memberPhoneNumber:
+            userCredential.user!.phoneNumber ?? "",
+        FirestoreConstants.id: userCredential.user!.uid,
+      };
+      memberServices.addToFirebaseWithId(map, userCredential.user!.uid);
+    }
+    return userCredential.user!.uid;
   }
 
   Future<void> signInWithFacebook() async {

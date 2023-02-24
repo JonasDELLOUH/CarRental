@@ -1,12 +1,11 @@
+import 'package:car_rental/app/env/links.dart';
 import 'package:car_rental/presentation/home/home_controller.dart';
-import 'package:car_rental/presentation/splash2/splash2_controller.dart';
 
-import 'package:car_rental/presentation/car_details/car_details.dart';
+import 'package:car_rental/presentation/car_details/car_details_screen.dart';
 import 'package:car_rental/presentation/searchpage/search_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../core/constants/colors.dart';
@@ -17,27 +16,19 @@ import '../../core/services/car_brand_services.dart';
 import '../../core/services/car_services.dart';
 import '../../core/utility/car_brand_card.dart';
 import '../../core/utility/car_card.dart';
+import '../../core/utility/size_utils.dart';
+import '../../core/widgets/common_loading.dart';
 import '../../core/widgets/text_widgets.dart';
-import '../main/main_controller.dart';
-
-// class Home extends StatefulWidget {
-//   const Home({Key? key}) : super(key: key);
-//
-//   @override
-//   State<Home> createState() => _HomeState();
-// }
 
 class HomeScreen extends StatelessWidget {
   HomeController controller = Get.put(HomeController());
   CarServices carServices = CarServices();
   CarBrandService carBrandService = CarBrandService();
-  final Splash2Controller _splash2Controller = Get.find();
   Car? car;
   List<Car> cars = [];
   List<CarBrand> carBrands = [];
 
   HomeScreen({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +37,7 @@ class HomeScreen extends StatelessWidget {
     final orientation = MediaQuery.of(context).orientation;
     return Scaffold(
       appBar: AppBar(
+        // leading: null,
         title: const Text("RENTALCAR"),
       ),
       body: Container(
@@ -123,27 +115,10 @@ class HomeScreen extends StatelessWidget {
               ),
               Container(
                 height: height * 0.09,
-                // child: StreamBuilder<List<CarBrand>>(
-                //   stream: carBrandService.getCarBrands1Stream(),
-                //   builder: (BuildContext context,
-                //       AsyncSnapshot<List<CarBrand>> snapshot) {
-                //     if (snapshot.hasError) {
-                //       return const Text('Something went wrong');
-                //     }
-                //     if (snapshot.connectionState == ConnectionState.waiting) {
-                //       return carBrandsView(
-                //           context: context,
-                //           carBrands:
-                //               _splash2Controller.defaultCarBrandList.value!);
-                //     }
-                //     if (snapshot.hasData) {}
-                //
-                //     carBrands = snapshot.data!;
-                //     return carBrandsView(
-                //         context: context, carBrands: carBrands);
-                //   },
-                // ),
-                child: Obx(() => controller.carBrands.isEmpty ? Container() : carBrandsView(context: context, carBrands: controller.carBrands)),
+                child: Obx(() => controller.carBrands.isEmpty
+                    ? Container()
+                    : carBrandsView(
+                        context: context, carBrands: controller.carBrands)),
               ),
               Container(
                 height: height * 0.51,
@@ -167,7 +142,12 @@ class HomeScreen extends StatelessWidget {
                 //           return carsView(context: context, carList: cars);
                 //         },
                 //       ),
-                child: Obx(() => controller.cars.isEmpty ? Container() : carsView(context: context, carList: controller.cars)),
+                child: Obx(() => controller.cars.isEmpty
+                    ? CommonLoading(
+                        size.width,
+                        height * 0.51,
+                      )
+                    : carsView(context: context, carList: controller.cars)),
               )
             ],
           ),
@@ -189,10 +169,12 @@ class HomeScreen extends StatelessWidget {
             car: carList[index],
             height: MediaQuery.of(context).size.height * 0.51,
             function: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => CarDetails(car: carList[index])));
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) =>
+              //             CarDetailsScreen(car: carList[index])));
+              Get.toNamed(AppLinks.carDetailsRoute, arguments: carList[index]);
             });
       },
       itemCount: carList.length,

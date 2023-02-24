@@ -1,13 +1,12 @@
-import 'package:car_rental/presentation/car_details/car_details_controller.dart';
+import 'package:car_rental/presentation/sign_up/sign_up_controller.dart';
 import 'package:get/get.dart';
 
 import '../../app/getxservice/user_session_injected.dart';
 
-class CarDetailsBinding extends Bindings{
+class SignUpBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => CarDetailsController());
+    Get.lazyPut(() => SignUpController());
     Get.lazyPut(() => UserSessionServiceInjected());
   }
-
 }
