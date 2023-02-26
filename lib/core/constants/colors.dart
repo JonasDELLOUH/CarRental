@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 class ConstColors{
   static const backgroundColor = Colors.white;
-  static const blueColor = Colors.blue;
+  static const blueColor = Color(0xFF2136C0);
   static const redColor = Colors.red;
   static const whiteColor = Colors.white;
   static const blackColor = Colors.black;

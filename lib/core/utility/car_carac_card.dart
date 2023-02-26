@@ -20,7 +20,7 @@ Widget CarCaracCard({required String carac, required IconData caracIconData, req
         ),
       ),
       SizedBox(height: 1,),
-      richText(text: carac, fontSize: 10, fontWeight: FontWeight.bold)
+      myText(text: carac, fontSize: 10, fontWeight: FontWeight.bold)
     ],
   );
 }

@@ -7,6 +7,7 @@ class FirestoreConstants{
   static String id = "id";
 
   /// Member
+  static String member = "member";
   static String memberFullName = "memberFullName";
   static String memberPhoneNumber = "memberPhoneNumber";
   static String memberEmail = "memberEmail";
@@ -36,10 +37,14 @@ class FirestoreConstants{
   static String carBrandName = "carBrandName";
 
   ///Customer
-  static String member = "member";
   static String customer = "customer";
+  static String customerIdentityFile = "imageUrl";
+  static String customerProfileImage = "imageUrl2";
 
   ///Reservation
   static String reservation = "reservation";
   static String reservationDate = "reservationDate";
+
+  ///Location
+  static String location = "location";
 }

@@ -9,7 +9,7 @@ import '../../core/constants/my_icons.dart';
 import '../../core/models/member.dart';
 import '../../core/widgets/bar_item.dart';
 import '../home/home_screen.dart';
-import '../settings/settings.dart';
+import '../settings/settings_screen.dart';
 
 class MainScreen extends GetWidget<MainController> {
   MainScreen({Key? key}) : super(key: key);
@@ -34,12 +34,13 @@ class MainScreen extends GetWidget<MainController> {
                     controller.selectedWidgetIndex.value = 1;
                   },
                   selected: controller.selectedWidgetIndex.value == 1),
-              if (userSession.userIsCustomer.value) BarItem(
-                  iconData: MyIcons.carIconData(),
-                  onPressed: () {
-                    controller.selectedWidgetIndex.value = 2;
-                  },
-                  selected: controller.selectedWidgetIndex.value == 2),
+              if (userSession.userIsCustomer.value)
+                BarItem(
+                    iconData: MyIcons.carIconData(),
+                    onPressed: () {
+                      controller.selectedWidgetIndex.value = 2;
+                    },
+                    selected: controller.selectedWidgetIndex.value == 2),
               BarItem(
                   iconData: MyIcons.notificationIconData(),
                   onPressed: () {
@@ -68,7 +69,7 @@ class MainScreen extends GetWidget<MainController> {
       case 3:
         return const NotificationsPage();
       case 4:
-        return Settings(member: Member.defaultMember());
+        return SettingsScreen();
       default:
         return HomeScreen();
     }

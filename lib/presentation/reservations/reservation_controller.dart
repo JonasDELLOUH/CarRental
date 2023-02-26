@@ -8,6 +8,7 @@ import '../../core/services/reservation_services.dart';
 class ReservationController extends GetxController {
   RxList<Reservation> reservations = RxList<Reservation>();
   final userSession = Get.find<UserSessionServiceInjected>();
+  RxBool isLoading = false.obs;
 
   @override
   void onInit() {
@@ -22,10 +23,12 @@ class ReservationController extends GetxController {
   }
 
   getReservations() async {
+    isLoading.value = true;
     final reservationServices = ReservationServices();
     List l = await reservationServices.getCollectionToMap(
         fieldName: FirestoreConstants.customer,
         value: userSession.customer.value!.customerId);
+    isLoading.value = false;
     reservations.value = Reservation.toList(l);
   }
 }

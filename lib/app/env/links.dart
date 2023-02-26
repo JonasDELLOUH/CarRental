@@ -9,4 +9,6 @@ class AppLinks {
   static const String reservationRoute= "/reservation_route";
   static const String carDetailsRoute = "/car_details_route";
   static const String signUpAsCustomerRoute = "/sign_up_as_customer_route";
+  static const String locationsRoute = "/locations_route";
+  static const String profileRoute = "/profile_route";
 }

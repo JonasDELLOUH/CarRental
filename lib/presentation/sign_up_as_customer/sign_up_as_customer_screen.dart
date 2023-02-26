@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:car_rental/presentation/sign_up_as_customer/sign_up_as_customer_controller.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -14,8 +15,14 @@ class SignUpAsCustomerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery
+        .of(context)
+        .size
+        .height;
+    double width = MediaQuery
+        .of(context)
+        .size
+        .width;
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -48,13 +55,14 @@ class SignUpAsCustomerScreen extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  // takeFile();
+                  takeFile();
                 },
                 child: Card(
                   child: Obx(
-                    () => controller.identityFile.value == null
-                        ? richText(text: 'add_identity_file'.tr)
-                        : richText(text: controller.identityFile.value!.path),
+                        () =>
+                    controller.identityFile.value == null
+                        ? myText(text: 'add_identity_file'.tr)
+                        : myText(text: controller.identityFile.value!.path),
                   ),
                 ),
               ),
@@ -82,7 +90,7 @@ class SignUpAsCustomerScreen extends StatelessWidget {
                         takePicture(ImageSource.gallery);
                       },
                       child:
-                          MyIcons.libraryAddIcon(color: ConstColors.whiteColor))
+                      MyIcons.libraryAddIcon(color: ConstColors.whiteColor))
                 ],
               ),
               const SizedBox(
@@ -91,16 +99,16 @@ class SignUpAsCustomerScreen extends StatelessWidget {
               SizedBox(
                 height: height * 0.2,
                 child: Center(
-                  child: Obx(()
-                    => controller.memberImage.value != null
-                        ? ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                                topRight: Radius.circular(8),
-                                topLeft: Radius.circular(8),
-                                bottomLeft: Radius.circular(8),
-                                bottomRight: Radius.circular(8)),
-                            child: Image.file(controller.memberImage.value!))
-                        : richText(text: 'no_image'.tr),
+                  child: Obx(() =>
+                  controller.memberImage.value != null
+                      ? ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(8),
+                          topLeft: Radius.circular(8),
+                          bottomLeft: Radius.circular(8),
+                          bottomRight: Radius.circular(8)),
+                      child: Image.file(controller.memberImage.value!))
+                      : myText(text: 'no_image'.tr),
                   ),
                 ),
               ),
@@ -121,7 +129,7 @@ class SignUpAsCustomerScreen extends StatelessWidget {
                           bottomLeft: Radius.circular(5),
                           bottomRight: Radius.circular(5))),
                   child: Center(
-                    child: richText(
+                    child: myText(
                         text: 'submit'.tr, color: ConstColors.backgroundColor),
                   ),
                 ),
@@ -141,12 +149,10 @@ class SignUpAsCustomerScreen extends StatelessWidget {
   }
 
 
-// takeFile() async {
-//   final result = await FilePicker.platform.pickFiles(allowMultiple: false);
-//   if (result != null) {
-//     setState(() {
-//       _identityFile = File(result.files.single.path!);
-//     });
-//   } else {}
-// }
+takeFile() async {
+  final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+  if (result != null) {
+    controller.identityFile.value = File(result.files.single.path!);
+  }
+}
 }

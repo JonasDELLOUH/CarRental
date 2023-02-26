@@ -31,7 +31,7 @@ Widget reservationCard({required Reservation reservation, required void Function
               ),
               Column(
                 children: [
-                  richText(
+                  myText(
                       text:
                           "${reservation.car.carBrand.carBrandName} ${reservation.car.carModel}",
                       fontSize: 20,
@@ -42,7 +42,7 @@ Widget reservationCard({required Reservation reservation, required void Function
                   Row(
                     children: [
                       MyIcons.directionsCarFilled(color: ConstColors.blueColor, size: 20),
-                      richText(
+                      myText(
                           text:
                               " ${reservation.car.nbrPlaces.toString()} places",
                           fontSize: 20),
@@ -52,7 +52,7 @@ Widget reservationCard({required Reservation reservation, required void Function
                     height: 2,
                   ),
 
-                  richText(
+                  myText(
                       text:
                           "${'reserve_at'.tr} ${DateHandler.dateFormat(reservation.reservationDate)}", fontSize: 12),
                   SizedBox(height: 3,),
@@ -71,7 +71,7 @@ Widget reservationCard({required Reservation reservation, required void Function
                               bottomLeft: Radius.circular(3),
                               bottomRight: Radius.circular(3))),
                       child: Center(
-                        child: richText(
+                        child: myText(
                             text: 'to_free'.tr,
                             color: ConstColors.backgroundColor, fontSize: 15),
                       ),
@@ -90,7 +90,7 @@ Widget reservationCard({required Reservation reservation, required void Function
                 MyIcons.attachMoney(
                     color: ConstColors.blueColor
                 ),
-                richText(text: " ${reservation.car.rentalPrice*0.7} FCFA/${"day".tr}", fontSize: 12)
+                myText(text: " ${reservation.car.rentalPrice*0.7} FCFA/${"day".tr}", fontSize: 12)
               ],
             ),
             InkWell(
@@ -106,7 +106,7 @@ Widget reservationCard({required Reservation reservation, required void Function
                         bottomLeft: Radius.circular(5),
                         bottomRight: Radius.circular(5))),
                 child: Center(
-                  child: richText(
+                  child: myText(
                       text: 'rent_now'.tr,
                       color: ConstColors.backgroundColor, fontSize: 15),
                 ),

@@ -49,7 +49,7 @@ Widget CarCard({required Car car, required double height, required void Function
             padding: EdgeInsets.all(10),
             child: Column(
               children: [
-                richText(
+                myText(
                     text: "${car.carBrand.carBrandName} ${car.carModel}",
                     fontSize: 10),
                 Row(
@@ -61,7 +61,7 @@ Widget CarCard({required Car car, required double height, required void Function
                     MyIcons.directionsCarFilled(
                       color: ConstColors.blueColor
                     ),
-                    richText(text: " ${car.nbrPlaces.toString()} places", fontSize: 15),
+                    myText(text: " ${car.nbrPlaces.toString()} places", fontSize: 15),
                   ],
                 ),
                 const SizedBox(height: 2,),
@@ -70,7 +70,7 @@ Widget CarCard({required Car car, required double height, required void Function
                     MyIcons.attachMoney(
                         color: ConstColors.blueColor
                     ),
-                    richText(text: " ${car.rentalPrice} FCFA/${"day".tr}", fontSize: 12)
+                    myText(text: " ${car.rentalPrice} FCFA/${"day".tr}", fontSize: 12)
                   ],
                 )
               ],

@@ -22,7 +22,7 @@ Widget CarBrandCard({required CarBrand carBrand, required double height}) {
           width: height * 0.7,
           fit: BoxFit.cover,
         )),
-        richText(text: carBrand.carBrandName, fontSize: height * 0.18)
+        myText(text: carBrand.carBrandName, fontSize: height * 0.18)
       ],
     ),
   );

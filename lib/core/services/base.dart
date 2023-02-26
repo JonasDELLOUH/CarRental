@@ -1,7 +1,11 @@
+import 'dart:async';
 import 'dart:io';
 
+import 'package:car_rental/core/utility/functions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 import '../constants/firestore_constants.dart';
 
@@ -45,26 +49,59 @@ abstract class BaseServices {
         map[FirestoreConstants.imageUrl4] = urlString;
       }
       await document.set(map);
+    } on TimeoutException catch (e, strace) {
+      appSnackBar("error", "is_time_out_exception".tr, "");
+      print(e);
+      print(strace);
+    } on SocketException catch (e, strace) {
+      appSnackBar("error", "is_socketException".tr, "");
+      print(e);
+      print(strace);
+    } on PlatformException catch (e, strace) {
+      appSnackBar("error", "is_platform_exception".tr, "");
+      print(e);
+      print(strace);
+    } on FirebaseException catch (e, strace) {
+      appSnackBar("error", "is_firebase_exception".tr, "");
+      print(e);
+      print(strace);
     } catch (e, strace) {
       print(e);
       print(strace);
     }
+  }
 
-    Future<void> updateData(Map<String, dynamic> map, {File? file}) async {
-      final document = firestoreInstance
-          .collection(collectionName)
-          .doc(map[FirestoreConstants.id]);
-      try {
-        if (file != null) {
-          final ref = storageRef.child(collectionName).child(document.id);
-          final urlString = await addImageToStorage(ref, file);
-          map[FirestoreConstants.imageUrl] = urlString;
-        }
-        await document.update(map);
-      } catch (e, strace) {
-        print(e);
-        print(strace);
+  Future<void> updateData(Map<String, dynamic> map, {File? file}) async {
+    final document = firestoreInstance
+        .collection(collectionName)
+        .doc(map[FirestoreConstants.id]);
+    try {
+      if (file != null) {
+        final ref = storageRef.child(collectionName).child(document.id);
+        final urlString = await addImageToStorage(ref, file);
+        map[FirestoreConstants.imageUrl] = urlString;
       }
+      await document.update(map);
+      appSnackBar("success", "update_ok".tr, "");
+    } on TimeoutException catch (e, strace) {
+      appSnackBar("error", "is_time_out_exception".tr, "");
+      print(e);
+      print(strace);
+    } on SocketException catch (e, strace) {
+      appSnackBar("error", "is_socketException".tr, "");
+      print(e);
+      print(strace);
+    } on PlatformException catch (e, strace) {
+      appSnackBar("error", "is_platform_exception".tr, "");
+      print(e);
+      print(strace);
+    } on FirebaseException catch (e, strace) {
+      appSnackBar("error", "is_firebase_exception".tr, "");
+      print(e);
+      print(strace);
+    } catch (e, strace) {
+      print(e);
+      print(strace);
     }
   }
 
@@ -101,9 +138,25 @@ abstract class BaseServices {
           print('Document does not exist on the database');
           return {};
         }
+      } on TimeoutException catch (e, strace) {
+        appSnackBar("error", "is_time_out_exception".tr, "");
+        print(e);
+        print(strace);
+      } on SocketException catch (e, strace) {
+        appSnackBar("error", "is_socketException".tr, "");
+        print(e);
+        print(strace);
+      } on PlatformException catch (e, strace) {
+        appSnackBar("error", "is_platform_exception".tr, "");
+        print(e);
+        print(strace);
+      } on FirebaseException catch (e, strace) {
+        appSnackBar("error", "is_firebase_exception".tr, "");
+        print(e);
+        print(strace);
       } catch (e, strace) {
-        print("the error: $e");
-        print("his strace : $strace");
+        print(e);
+        print(strace);
       }
     }
     return null;
@@ -133,9 +186,25 @@ abstract class BaseServices {
       for (final DocumentSnapshot documentSnapshot in querySnapshot.docs) {
         datas.add(documentSnapshot.data() as Map<String, dynamic>);
       }
+    } on TimeoutException catch (e, strace) {
+      appSnackBar("error", "is_time_out_exception".tr, "");
+      print(e);
+      print(strace);
+    } on SocketException catch (e, strace) {
+      appSnackBar("error", "is_socketException".tr, "");
+      print(e);
+      print(strace);
+    } on PlatformException catch (e, strace) {
+      appSnackBar("error", "is_platform_exception".tr, "");
+      print(e);
+      print(strace);
+    } on FirebaseException catch (e, strace) {
+      appSnackBar("error", "is_firebase_exception".tr, "");
+      print(e);
+      print(strace);
     } catch (e, strace) {
-      print("the error: $e");
-      print("his strace : $strace");
+      print(e);
+      print(strace);
     }
     return datas;
   }
@@ -167,6 +236,22 @@ abstract class BaseServices {
         map[FirestoreConstants.imageUrl4] = urlString;
       }
       await document.set(map);
+    } on TimeoutException catch (e, strace) {
+      appSnackBar("error", "is_time_out_exception".tr, "");
+      print(e);
+      print(strace);
+    } on SocketException catch (e, strace) {
+      appSnackBar("error", "is_socketException".tr, "");
+      print(e);
+      print(strace);
+    } on PlatformException catch (e, strace) {
+      appSnackBar("error", "is_platform_exception".tr, "");
+      print(e);
+      print(strace);
+    } on FirebaseException catch (e, strace) {
+      appSnackBar("error", "is_firebase_exception".tr, "");
+      print(e);
+      print(strace);
     } catch (e, strace) {
       print(e);
       print(strace);
@@ -200,11 +285,26 @@ abstract class BaseServices {
       if (result.docs.isNotEmpty) {
         exists = true;
       }
+    } on TimeoutException catch (e, strace) {
+      appSnackBar("error", "is_time_out_exception".tr, "");
+      print(e);
+      print(strace);
+    } on SocketException catch (e, strace) {
+      appSnackBar("error", "is_socketException".tr, "");
+      print(e);
+      print(strace);
+    } on PlatformException catch (e, strace) {
+      appSnackBar("error", "is_platform_exception".tr, "");
+      print(e);
+      print(strace);
+    } on FirebaseException catch (e, strace) {
+      appSnackBar("error", "is_firebase_exception".tr, "");
+      print(e);
+      print(strace);
     } catch (e, strace) {
-      print("Voici l'erreur : $e");
-      print("Voici le strace : $strace");
+      print(e);
+      print(strace);
     }
-
     return exists;
   }
 }

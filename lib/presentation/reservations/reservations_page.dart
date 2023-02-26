@@ -1,3 +1,4 @@
+import 'package:car_rental/core/widgets/text_widgets.dart';
 import 'package:car_rental/presentation/reservations/reservation_controller.dart';
 
 import 'package:flutter/material.dart';
@@ -8,7 +9,6 @@ import '../../core/models/reservation.dart';
 import '../../core/utility/reservation_card.dart';
 import '../../core/utility/size_utils.dart';
 import '../../core/widgets/common_loading.dart';
-import '../../core/widgets/text_widgets.dart';
 
 class ReservationsPage extends StatelessWidget {
 
@@ -23,13 +23,13 @@ class ReservationsPage extends StatelessWidget {
     final orientation = MediaQuery.of(context).orientation;
     return Scaffold(
       appBar: AppBar(
-        title: richText(text: 'reservation'.tr),
+        title: myText(text: 'reservation'.tr),
       ),
       body: Container(
         margin: const EdgeInsets.all(15),
-        child: Obx(() => controller.reservations.isEmpty
-            ? CommonLoading(size.width ,
-          size.height * 0.8,)
+        child: Obx(() => controller.isLoading.value ? CommonLoading(size.width ,
+          size.height * 0.8,) : controller.reservations.isEmpty
+            ? Center(child: myText(text: 'no_car_booked'.tr, fontSize: 50),)
             : reservationsView(
                 context: context, reservations: controller.reservations)),
       ),

@@ -95,6 +95,9 @@ class MyIcons {
         size: size,
         color: color,
       );
+  static IconData mailIconData() => Icons.mail;
+  static IconData phoneIconData() => Icons.phone;
+  static IconData editIconData() => Icons.edit;
   static IconData personIconData() => Icons.person;
 
   static IconData languageIconData() => Icons.language;

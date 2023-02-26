@@ -1,4 +1,3 @@
-
 import '../constants/firestore_constants.dart';
 import 'member.dart';
 
@@ -17,24 +16,23 @@ class Customer {
   factory Customer.basicFromMap(Map<String, dynamic> map) {
     return Customer(
         customerId: map[FirestoreConstants.id],
-        member: Member.basicFromMap(map
-        [FirestoreConstants.member]),
-        identityFileUrl: map[FirestoreConstants.imageUrl],
-        memberImageUrl: map[FirestoreConstants.imageUrl2]);
+        member: Member.basicFromMap(map[FirestoreConstants.member]),
+        identityFileUrl: map[FirestoreConstants.imageUrl2],
+        memberImageUrl: map[FirestoreConstants.imageUrl]);
   }
 
   Map<String, dynamic> toMap() {
     return {
       FirestoreConstants.id: customerId,
       FirestoreConstants.member: member.memberId,
-      FirestoreConstants.imageUrl: identityFileUrl,
-      FirestoreConstants.imageUrl2: memberImageUrl
+      FirestoreConstants.imageUrl2: identityFileUrl,
+      FirestoreConstants.imageUrl: memberImageUrl
     };
   }
 
-  static List<Customer> toList(List jsonData){
+  static List<Customer> toList(List jsonData) {
     List<Customer> customers = [];
-    for(dynamic data in jsonData){
+    for (dynamic data in jsonData) {
       customers.add(Customer.basicFromMap(data));
     }
     return customers;

@@ -61,7 +61,18 @@ class WordLanguage extends Translations {
           'network_request_failed':
               "Impossible to connect. Please check your internet connection",
           'user_not_found': "No user found for this email",
-          'wrong_password': "Incorrect password for this user"
+          'wrong_password': "Incorrect password for this user",
+          'need_identity_file': "You need to add an identity file",
+          'need_profile_image': "You need to add an profile image",
+          'is_time_out_exception': "The operation take a long time",
+          'is_socketException': "The connection has been interrupted",
+          'is_firebase_exception': "Processing error",
+          'is_platform_exception': "Platform error",
+          'no_car_booked': "You have booked no car yet",
+          'profile': "Profile",
+          'cancel': "Cancel",
+          'edit': 'Edit',
+          'update_ok': "Modification made"
         },
         'fr_FR': {
           'sign': 'Connectez-vous à votre compte',
@@ -123,7 +134,18 @@ class WordLanguage extends Translations {
           'network_request_failed':
               "Impossible de se connecter. Veuillez vérifier votre connexion Internet",
           'user_not_found': "Aucun utilisateur trouvé pour cet e-mail",
-          'wrong_password': "Mot de passe incorrect pour cet utilisateur"
+          'wrong_password': "Mot de passe incorrect pour cet utilisateur",
+          'need_identity_file': "Vous devez ajouter un fichier d'identité",
+          'need_profile_image': "Vous devez ajouter une image de profile",
+          'is_time_out_exception': "L'opération prend beaucoup de temps",
+          'is_socketException': "Il y a eu interruption de la connexion",
+          'is_firebase_exception': "Erreur de traitement",
+          'is_platform_exception': "Erreur de plateforme",
+          'no_car_booked': "Vous avez réservé aucune voiture pour le moment",
+          'profile': "Profile",
+          'cancel': "Annuler",
+          'edit': 'Modifier',
+          'update_ok': "Modification faite"
         }
       };
 }

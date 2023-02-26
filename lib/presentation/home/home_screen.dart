@@ -62,14 +62,14 @@ class HomeScreen extends StatelessWidget {
                     ]),
                 child: Column(
                   children: [
-                    richText(
+                    myText(
                         text: 'home_express1'.tr,
                         color: ConstColors.blueColor,
                         fontWeight: FontWeight.bold),
                     const SizedBox(
                       height: 10,
                     ),
-                    richText(text: 'home_express2'.tr, fontSize: 15),
+                    myText(text: 'home_express2'.tr, fontSize: 15),
                     const SizedBox(
                       height: 10,
                     ),

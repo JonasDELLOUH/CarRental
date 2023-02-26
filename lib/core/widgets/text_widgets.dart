@@ -15,26 +15,28 @@ Widget myText(
       textStyle:
           TextStyle(fontSize: fontSize, fontWeight: fontWeight, color: color),
     ),
+    // maxLines: 4,
     textAlign: textAlign,
+    softWrap: true,
   );
 }
 
-Widget richText(
-    {required String text,
-    Color color = ConstColors.primaryColor,
-    double fontSize = 20,
-    FontWeight fontWeight = FontWeight.normal}) {
-  return RichText(
-    textAlign: TextAlign.center,
-    text: TextSpan(
-      text: text,
-      style: GoogleFonts.robotoSlab(
-        textStyle:
-            TextStyle(fontSize: fontSize, fontWeight: fontWeight, color: color),
-      ),
-      children: const <TextSpan>[
-        // TextSpan(text: text, style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize, color: color)),
-      ],
-    ),
-  );
-}
+// Widget richText(
+//     {required String text,
+//     Color color = ConstColors.primaryColor,
+//     double fontSize = 20,
+//     FontWeight fontWeight = FontWeight.normal}) {
+//   return RichText(
+//     textAlign: TextAlign.center,
+//     text: TextSpan(
+//       text: text,
+//       style: GoogleFonts.robotoSlab(
+//         textStyle:
+//             TextStyle(fontSize: fontSize, fontWeight: fontWeight, color: color),
+//       ),
+//       children: const <TextSpan>[
+//         // TextSpan(text: text, style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize, color: color)),
+//       ],
+//     ),
+//   );
+// }

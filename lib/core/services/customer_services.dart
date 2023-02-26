@@ -34,11 +34,11 @@ class CustomerServices extends BaseServices {
       String whereField = ""}) async {
     Map<String, dynamic>? map = await super.getDocumentToMap(
         document: document, whereValue: whereValue, whereField: whereField);
-    if (map != null && map!.isNotEmpty) {
+    if (map != null && map.isNotEmpty) {
       MemberServices memberServices = MemberServices();
       Map<String, dynamic>? map2 = await memberServices.getDocumentToMap(
           document: map[FirestoreConstants.member]);
-      map![FirestoreConstants.member] = map2;
+      map[FirestoreConstants.member] = map2;
     }
     return map;
   }

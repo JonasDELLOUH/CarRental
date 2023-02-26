@@ -36,7 +36,7 @@ class CarDetailsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              richText(
+              myText(
                   text: "${controller.car.value!.carBrand.carBrandName} ${controller.car.value!.carModel}",
                   fontSize: 25,
                   fontWeight: FontWeight.w600),
@@ -65,7 +65,7 @@ class CarDetailsScreen extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              richText(text: "overview".tr, fontWeight: FontWeight.w400),
+              myText(text: "overview".tr, fontWeight: FontWeight.w400),
               const SizedBox(
                 height: 5,
               ),
@@ -98,7 +98,7 @@ class CarDetailsScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  richText(
+                  myText(
                       text: "${controller.car.value!.rentalPrice * 0.3} cfa / ${'day'.tr}",
                       fontSize: 15),
                   InkWell(
@@ -117,7 +117,7 @@ class CarDetailsScreen extends StatelessWidget {
                               bottomLeft: Radius.circular(5),
                               bottomRight: Radius.circular(5))),
                       child: Center(
-                        child: richText(
+                        child: myText(
                             text: 'reserve_now'.tr,
                             color: ConstColors.backgroundColor),
                       ),
