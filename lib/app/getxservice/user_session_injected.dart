@@ -30,4 +30,6 @@ class UserSessionServiceInjected extends GetxService {
       customer.value = Customer.basicFromMap(map!);
     }
   }
+
+
 }

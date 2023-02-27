@@ -72,7 +72,10 @@ class WordLanguage extends Translations {
           'profile': "Profile",
           'cancel': "Cancel",
           'edit': 'Edit',
-          'update_ok': "Modification made"
+          'update_ok': "Modification made",
+          'french': "French",
+          'english': "English",
+          'language': "Language",
         },
         'fr_FR': {
           'sign': 'Connectez-vous à votre compte',
@@ -145,7 +148,10 @@ class WordLanguage extends Translations {
           'profile': "Profile",
           'cancel': "Annuler",
           'edit': 'Modifier',
-          'update_ok': "Modification faite"
+          'update_ok': "Modification faite",
+          'french': "Français",
+          'english': "Anglais",
+          'language': "Language",
         }
       };
 }

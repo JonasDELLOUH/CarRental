@@ -2,6 +2,7 @@ import 'package:car_rental/app/env/links.dart';
 import 'package:car_rental/app/getxservice/user_session_injected.dart';
 import 'package:car_rental/presentation/settings/settings_controller.dart';
 import 'package:drop_down_list/drop_down_list.dart';
+import 'package:drop_down_list/model/selected_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -75,7 +76,7 @@ class SettingsScreen extends StatelessWidget {
                 height: 5,
               ),
               InkWell(
-                onTap: (){
+                onTap: () {
                   Get.toNamed(AppLinks.profileRoute);
                 },
                 child: settingTile(
@@ -85,12 +86,12 @@ class SettingsScreen extends StatelessWidget {
                     context: context),
               ),
               InkWell(
-                onTap: (){
+                onTap: () {
                   DropDownState(
                     DropDown(
-                      bottomSheetTitle: const Text(
-                        "Priorité de la tâche",
-                        style: TextStyle(
+                      bottomSheetTitle: Text(
+                        "language".tr,
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20.0,
                         ),
@@ -102,14 +103,16 @@ class SettingsScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      data: controller.listOfCities ?? [],
+                      data: controller.listOfLanguages ?? [],
                       selectedItems: (List<dynamic> selectedList) {
-                        // List<String> list = [];
-                        // for (var item in selectedList) {
-                        //   if (item is SelectedListItem) {
-                        //     controller.priority.value = item.value!;
-                        //   }
-                        // }
+                        for (var item in selectedList) {
+                          if (item is SelectedListItem) {
+                            // controller.listOfLanguages.va= item.value!;
+                            controller.updateLanguage(
+                                item.value!.substring(0, 2),
+                                item.value!.substring(3, 5));
+                          }
+                        }
                         // showSnackBar(list.toString());
                       },
                       enableMultipleSelection: false,
