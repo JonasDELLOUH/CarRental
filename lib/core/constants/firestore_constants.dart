@@ -43,8 +43,9 @@ class FirestoreConstants{
 
   ///Reservation
   static String reservation = "reservation";
-  static String reservationDate = "reservationDate";
 
   ///Location
   static String location = "location";
+  static String locationDate = "reservationDate";
+
 }

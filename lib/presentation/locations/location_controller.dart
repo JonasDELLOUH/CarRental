@@ -2,33 +2,28 @@ import 'package:car_rental/app/getxservice/user_session_injected.dart';
 import 'package:car_rental/core/constants/firestore_constants.dart';
 import 'package:get/get.dart';
 
-import '../../core/models/reservation.dart';
-import '../../core/services/reservation_services.dart';
+import '../../core/models/location.dart';
+import '../../core/services/location_services.dart';
 
-class ReservationController extends GetxController {
-  RxList<Reservation> reservations = RxList<Reservation>();
+class LocationController extends GetxController {
+  RxList<Location> reservations = RxList<Location>();
   final userSession = Get.find<UserSessionServiceInjected>();
   RxBool isLoading = false.obs;
 
   @override
   void onInit() {
     super.onInit();
-    getReservations();
+    getLocations();
   }
 
-  @override
-  void onReady() {
-    // TODO: implement onReady
-    super.onReady();
-  }
 
-  getReservations() async {
+  getLocations() async {
     isLoading.value = true;
     final reservationServices = ReservationServices();
     List l = await reservationServices.getCollectionToMap(
         fieldName: FirestoreConstants.customer,
         value: userSession.customer.value!.customerId);
     isLoading.value = false;
-    reservations.value = Reservation.toList(l);
+    reservations.value = Location.toList(l);
   }
 }

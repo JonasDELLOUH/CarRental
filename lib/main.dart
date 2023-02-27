@@ -18,7 +18,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   // Locale myLocale = Localizations.localeOf(context);
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -33,12 +33,6 @@ class MyApp extends StatelessWidget {
       locale: const Locale('en', 'US'),
       initialRoute: AppLinks.splash1Route,
       getPages: AppRouting.routes,
-      // supportedLocales: const [
-      //   Locale('en', 'US'),
-      //   Locale('fr_FR', '')
-      // ],
-      // locale: Localizations.localeOf(context),
-      // fallbackLocale: const Locale('en', 'US'),
     );
   }
 }
@@ -53,7 +47,7 @@ class AuthWrapper extends StatelessWidget {
     if (firebaseUser != null) {
       return MainScreen();
     }
-    return  SignInScreen();
+    return SignInScreen();
   }
 }
 
@@ -84,7 +78,7 @@ class _TestState extends State<Test> {
                     placeName: "placeNameplaceName");
                 addressServices.addToFirebase(address.toMap());
               },
-              child: Text("Ajouter une marque de voiture"),
+              child: const Text("Ajouter une marque de voiture"),
             ),
             Text("Voici la description de l'addresse $description"),
             ElevatedButton(
@@ -96,7 +90,7 @@ class _TestState extends State<Test> {
                     // description = address.description;
                   });
                 },
-                child: Text("GET"))
+                child: const Text("GET"))
           ],
         ),
       ),

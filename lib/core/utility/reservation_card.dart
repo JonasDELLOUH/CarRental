@@ -3,11 +3,11 @@ import 'package:get/get.dart';
 
 import '../constants/colors.dart';
 import '../constants/my_icons.dart';
-import '../models/reservation.dart';
+import '../models/location.dart';
 import '../widgets/text_widgets.dart';
 import 'date_handler.dart';
 
-Widget reservationCard({required Reservation reservation, required void Function() function}) {
+Widget reservationCard({required Location reservation, required void Function() function}) {
   return Container(
     margin: EdgeInsets.symmetric(vertical: 10),
     padding: EdgeInsets.all(10),
@@ -54,7 +54,7 @@ Widget reservationCard({required Reservation reservation, required void Function
 
                   myText(
                       text:
-                          "${'reserve_at'.tr} ${DateHandler.dateFormat(reservation.reservationDate)}", fontSize: 12),
+                          "${'reserve_at'.tr} ${DateHandler.dateFormat(reservation.locationDate)}", fontSize: 12),
                   SizedBox(height: 3,),
                   InkWell(
                     onTap: (){

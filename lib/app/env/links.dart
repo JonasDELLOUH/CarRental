@@ -6,9 +6,8 @@ class AppLinks {
   static const String mainRoute = '/main_route';
   static const String splash1Route = '/splash1_route';
   static const String splash2Route = '/splash2_route';
-  static const String reservationRoute= "/reservation_route";
+  static const String locationRoute = "/location_route";
   static const String carDetailsRoute = "/car_details_route";
   static const String signUpAsCustomerRoute = "/sign_up_as_customer_route";
-  static const String locationsRoute = "/locations_route";
   static const String profileRoute = "/profile_route";
 }

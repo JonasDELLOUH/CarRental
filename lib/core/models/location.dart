@@ -1,31 +1,48 @@
-import 'package:car_rental/core/constants/firestore_constants.dart';
-import 'package:car_rental/core/models/reservation.dart';
+import '../constants/firestore_constants.dart';
+import 'car.dart';
+import 'customer.dart';
 
 class Location {
-  Reservation reservation;
   String locationId;
+  Customer customer;
+  int locationDate;
+  Car car;
 
-  Location({required this.reservation, required this.locationId});
+  Location(
+      {required this.locationId,
+      required this.customer,
+      required this.car,
+      required this.locationDate});
 
   Map<String, dynamic> toMap() {
     return {
       FirestoreConstants.id: locationId,
-      FirestoreConstants.reservation: reservation.reservationId
+      FirestoreConstants.customer: customer.customerId,
+      FirestoreConstants.locationDate:
+          DateTime.now().millisecondsSinceEpoch.toInt(),
+      FirestoreConstants.car: car.carId
     };
   }
 
   factory Location.basicFromMap(Map<String, dynamic> map) {
     return Location(
-        reservation:
-            Reservation.basicFromMap(map[FirestoreConstants.reservation]),
-        locationId: map[FirestoreConstants.id]);
+        locationId: map[FirestoreConstants.id],
+        customer: Customer.basicFromMap(map[FirestoreConstants.customer]),
+        car: Car.basicFromMap(map[FirestoreConstants.car]),
+        locationDate: map[FirestoreConstants.locationDate]);
   }
 
   static List<Location> toList(List jsonData) {
-    List<Location> locations = [];
+    List<Location> reservations = [];
     for (dynamic data in jsonData) {
-      locations.add(Location.basicFromMap(data));
+      reservations.add(Location.basicFromMap(data));
     }
-    return locations;
+    return reservations;
   }
+
+  static Location defaultReservation() => Location(
+      locationId: "reservationId",
+      customer: Customer.defaultCustomer(),
+      car: Car.defaultCar(),
+      locationDate: DateTime.now().millisecond);
 }

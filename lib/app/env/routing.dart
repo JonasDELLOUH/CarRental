@@ -3,12 +3,9 @@ import 'package:car_rental/presentation/car_details/car_details_binding.dart';
 import 'package:car_rental/presentation/car_details/car_details_screen.dart';
 import 'package:car_rental/presentation/home/home_screen.dart';
 import 'package:car_rental/presentation/home/home_binding.dart';
-import 'package:car_rental/presentation/locations/locations_binding.dart';
-import 'package:car_rental/presentation/locations/locations_screen.dart';
 import 'package:car_rental/presentation/main/main_screen.dart';
 import 'package:car_rental/presentation/profile/profile_binding.dart';
 import 'package:car_rental/presentation/profile/profile_screen.dart';
-import 'package:car_rental/presentation/reservations/reservation_binding.dart';
 import 'package:car_rental/presentation/settings/settings_binding.dart';
 import 'package:car_rental/presentation/settings/settings_screen.dart';
 import 'package:car_rental/presentation/sign_in/sign_in_screen.dart';
@@ -19,8 +16,9 @@ import 'package:car_rental/presentation/splash1/splash1_binding.dart';
 import 'package:car_rental/presentation/splash1/splash1_screen.dart';
 import 'package:get/get.dart';
 
+import '../../presentation/locations/location_binding.dart';
+import '../../presentation/locations/locations_page.dart';
 import '../../presentation/main/main_binding.dart';
-import '../../presentation/reservations/reservations_page.dart';
 import '../../presentation/sign_up_as_customer/sign_up_as_customer_binding.dart';
 import '../../presentation/sign_up_as_customer/sign_up_as_customer_screen.dart';
 import '../../presentation/splash2/splash2_binding.dart';
@@ -55,13 +53,9 @@ class AppRouting {
         page: () => const Splash2Screen(),
         binding: Splash2Binding()),
     GetPage(
-        name: AppLinks.reservationRoute,
-        page: () => ReservationsPage(),
-        binding: ReservationBinding()),
-    GetPage(
-        name: AppLinks.locationsRoute,
-        page: () => LocationsScreen(),
-        binding: LocationsBinding()),
+        name: AppLinks.locationRoute,
+        page: () => LocationsPage(),
+        binding: LocationBinding()),
     GetPage(
         name: AppLinks.carDetailsRoute,
         page: () => CarDetailsScreen(),

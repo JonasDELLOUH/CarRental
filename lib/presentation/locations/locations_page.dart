@@ -1,20 +1,19 @@
 import 'package:car_rental/core/widgets/text_widgets.dart';
-import 'package:car_rental/presentation/reservations/reservation_controller.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../core/models/customer.dart';
-import '../../core/models/reservation.dart';
+import '../../core/models/location.dart';
 import '../../core/utility/reservation_card.dart';
 import '../../core/utility/size_utils.dart';
 import '../../core/widgets/common_loading.dart';
+import 'location_controller.dart';
 
-class ReservationsPage extends StatelessWidget {
+class LocationsPage extends StatelessWidget {
 
-  ReservationsPage({Key? key}) : super(key: key);
+  LocationsPage({Key? key}) : super(key: key);
 
-  ReservationController controller = Get.find<ReservationController>();
+  LocationController controller = Get.find<LocationController>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +28,7 @@ class ReservationsPage extends StatelessWidget {
         margin: const EdgeInsets.all(15),
         child: Obx(() => controller.isLoading.value ? CommonLoading(size.width ,
           size.height * 0.8,) : controller.reservations.isEmpty
-            ? Center(child: myText(text: 'no_car_booked'.tr, fontSize: 50),)
+            ? Center(child: myText(text: 'no_car_rented'.tr, fontSize: 50),)
             : reservationsView(
                 context: context, reservations: controller.reservations)),
       ),
@@ -38,7 +37,7 @@ class ReservationsPage extends StatelessWidget {
 
   Widget reservationsView(
       {required BuildContext context,
-      required List<Reservation> reservations}) {
+      required List<Location> reservations}) {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount:

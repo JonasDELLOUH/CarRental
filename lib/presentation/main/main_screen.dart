@@ -1,7 +1,6 @@
 import 'package:car_rental/app/getxservice/user_session_injected.dart';
 import 'package:car_rental/presentation/main/main_controller.dart';
 import 'package:car_rental/presentation/notifications/notifications_page.dart';
-import 'package:car_rental/presentation/reservations/reservations_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../core/constants/colors.dart';
@@ -9,6 +8,7 @@ import '../../core/constants/my_icons.dart';
 import '../../core/models/member.dart';
 import '../../core/widgets/bar_item.dart';
 import '../home/home_screen.dart';
+import '../locations/locations_page.dart';
 import '../settings/settings_screen.dart';
 
 class MainScreen extends GetWidget<MainController> {
@@ -65,7 +65,7 @@ class MainScreen extends GetWidget<MainController> {
       case 1:
         return HomeScreen();
       case 2:
-        return ReservationsPage();
+          return LocationsPage();
       case 3:
         return const NotificationsPage();
       case 4:

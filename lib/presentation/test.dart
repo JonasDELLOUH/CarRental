@@ -5,8 +5,8 @@ import 'package:image_picker/image_picker.dart';
 
 import '../core/models/car.dart';
 import '../core/models/customer.dart';
-import '../core/models/reservation.dart';
-import '../core/services/reservation_services.dart';
+import '../core/models/location.dart';
+import '../core/services/location_services.dart';
 import '../core/widgets/my_gradient.dart';
 
 
@@ -118,11 +118,11 @@ class _WritePostState extends State<WritePost> {
     FocusScope.of(context).requestFocus(FocusNode());
     // Navigator.pop(context);
     if (true) {
-      Reservation reservation = Reservation(
-          reservationId: "",
+      Location reservation = Location(
+          locationId: "",
           customer: Customer.defaultCustomer(),
           car: Car.defaultCar(),
-          reservationDate: DateTime.now().millisecondsSinceEpoch.toInt());
+          locationDate: DateTime.now().millisecondsSinceEpoch.toInt());
       ReservationServices reservationServices = ReservationServices();
       reservationServices.addToFirebase(reservation.toMap());
     }
