@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/my_icons.dart';
@@ -115,25 +116,23 @@ class SignUpAsCustomerScreen extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              InkWell(
-                onTap: () {},
-                child: Container(
-                  padding: const EdgeInsets.all(5),
-                  height: 50,
-                  // width: width * 0.45,
-                  decoration: const BoxDecoration(
-                      color: ConstColors.blueColor,
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(5),
-                          topLeft: Radius.circular(5),
-                          bottomLeft: Radius.circular(5),
-                          bottomRight: Radius.circular(5))),
-                  child: Center(
-                    child: myText(
-                        text: 'submit'.tr, color: ConstColors.backgroundColor),
-                  ),
-                ),
-              )
+              RoundedLoadingButton(
+                width: width * 0.8,
+                color: ConstColors.blueColor,
+                height: 50,
+                controller: controller.btnController,
+                onPressed: () {
+                  controller.signUpAsCustomer();
+                },
+                // color: ColorConstant.indigo300,
+                borderRadius: 10,
+                child: myText(
+                    text: "submit".tr,
+                    textAlign: TextAlign.right,
+                    fontSize: 20,
+                    color: ConstColors.whiteColor,
+                    fontWeight: FontWeight.w500),
+              ),
             ],
           ),
         ),

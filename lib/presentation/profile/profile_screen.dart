@@ -1,7 +1,10 @@
 import 'dart:io';
 
+import 'package:car_rental/app/env/links.dart';
 import 'package:car_rental/app/getxservice/user_session_injected.dart';
 import 'package:car_rental/core/constants/colors.dart';
+import 'package:car_rental/core/constants/const_strings.dart';
+import 'package:car_rental/core/utility/functions.dart';
 import 'package:car_rental/presentation/profile/profile_controller.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
@@ -89,6 +92,32 @@ class ProfileScreen extends StatelessWidget {
                       },
                       context: context),
                 ),
+                const SizedBox(
+                  height: 5,
+                ),
+                InkWell(
+                  onTap: () async {
+                    await removeSharedPref(ConstString.userUidPrefKey);
+                    Get.offAllNamed(AppLinks.signInRoute);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(5),
+                    height: 50,
+                    width: width * 0.5,
+                    decoration: const BoxDecoration(
+                        color: ConstColors.blueColor,
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(5),
+                            topLeft: Radius.circular(5),
+                            bottomLeft: Radius.circular(5),
+                            bottomRight: Radius.circular(5))),
+                    child: Center(
+                      child: myText(
+                          text: 'log_out'.tr,
+                          color: ConstColors.backgroundColor),
+                    ),
+                  ),
+                )
               ],
             ),
           ),

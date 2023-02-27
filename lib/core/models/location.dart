@@ -7,12 +7,13 @@ class Location {
   Customer customer;
   int locationDate;
   Car car;
+  int nbrDayOfRent;
 
   Location(
       {required this.locationId,
       required this.customer,
       required this.car,
-      required this.locationDate});
+      required this.locationDate, required this.nbrDayOfRent});
 
   Map<String, dynamic> toMap() {
     return {
@@ -29,7 +30,7 @@ class Location {
         locationId: map[FirestoreConstants.id],
         customer: Customer.basicFromMap(map[FirestoreConstants.customer]),
         car: Car.basicFromMap(map[FirestoreConstants.car]),
-        locationDate: map[FirestoreConstants.locationDate]);
+        locationDate: map[FirestoreConstants.locationDate], nbrDayOfRent: map[FirestoreConstants.nbrDayOfRent]);
   }
 
   static List<Location> toList(List jsonData) {
@@ -44,5 +45,7 @@ class Location {
       locationId: "reservationId",
       customer: Customer.defaultCustomer(),
       car: Car.defaultCar(),
-      locationDate: DateTime.now().millisecond);
+      locationDate: DateTime.now().millisecond,
+    nbrDayOfRent: 2
+  );
 }

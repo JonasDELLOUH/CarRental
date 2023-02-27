@@ -6,6 +6,8 @@ import 'package:car_rental/presentation/home/home_binding.dart';
 import 'package:car_rental/presentation/main/main_screen.dart';
 import 'package:car_rental/presentation/profile/profile_binding.dart';
 import 'package:car_rental/presentation/profile/profile_screen.dart';
+import 'package:car_rental/presentation/rent/rent_bindings.dart';
+import 'package:car_rental/presentation/rent/rent_screen.dart';
 import 'package:car_rental/presentation/settings/settings_binding.dart';
 import 'package:car_rental/presentation/settings/settings_screen.dart';
 import 'package:car_rental/presentation/sign_in/sign_in_screen.dart';
@@ -71,6 +73,10 @@ class AppRouting {
     GetPage(
         name: AppLinks.profileRoute,
         page: () => ProfileScreen(),
-        binding: ProfileBinding())
+        binding: ProfileBinding()),
+    GetPage(
+        name: AppLinks.rentRoute,
+        page: () => RentScreen(),
+        binding: RentBindings())
   ];
 }

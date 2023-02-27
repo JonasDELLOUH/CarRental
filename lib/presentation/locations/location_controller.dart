@@ -16,7 +16,6 @@ class LocationController extends GetxController {
     getLocations();
   }
 
-
   getLocations() async {
     isLoading.value = true;
     final reservationServices = ReservationServices();

@@ -35,7 +35,7 @@ class WordLanguage extends Translations {
           'search_cars': 'Search Cars',
           'reservation': 'Reservations',
           'reserve_at': "Reserve",
-          'rent_now': 'Rent',
+          'rent_now': 'Rent Now',
           'to_free': 'Free',
           'sign_up_to_customer': "Create a Customer account",
           'identity_file': 'Identity document',
@@ -76,6 +76,11 @@ class WordLanguage extends Translations {
           'french': "French",
           'english': "English",
           'language': "Language",
+          'you_are_customer': "You are now a customer",
+          'nbr_rent_day': "Number of rental days",
+          'total': "Total",
+          'pay': "Pay",
+          'log_out': "Log out"
         },
         'fr_FR': {
           'sign': 'Connectez-vous à votre compte',
@@ -152,6 +157,11 @@ class WordLanguage extends Translations {
           'french': "Français",
           'english': "Anglais",
           'language': "Language",
+          'you_are_customer': "Vous êtes maintenant un client",
+          'nbr_rent_day': " Nombre de jour de location",
+          'total': "Total",
+          'pay': "Payer",
+          'log_out': "Se déconnecter"
         }
       };
 }

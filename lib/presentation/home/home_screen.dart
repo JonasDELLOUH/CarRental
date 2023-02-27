@@ -169,11 +169,6 @@ class HomeScreen extends StatelessWidget {
             car: carList[index],
             height: MediaQuery.of(context).size.height * 0.51,
             function: () {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) =>
-              //             CarDetailsScreen(car: carList[index])));
               Get.toNamed(AppLinks.carDetailsRoute, arguments: carList[index]);
             });
       },

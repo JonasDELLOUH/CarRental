@@ -14,11 +14,11 @@ class CarDetailsController extends GetxController {
     car.value = Get.arguments;
   }
 
-  redirectToPay() {
-    if(!userSession.userIsCustomer.value){
+  redirectToRent() {
+    if (!userSession.userIsCustomer.value) {
       Get.toNamed(AppLinks.signUpAsCustomerRoute);
-    } else{
-
+    } else {
+      Get.toNamed(AppLinks.rentRoute, arguments: car.value);
     }
   }
 }

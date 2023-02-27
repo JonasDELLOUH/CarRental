@@ -8,4 +8,5 @@ class ConstColors{
   static const primaryColor = Colors.black;
   static const goldenColor = Color(0xFFEA890B);
   static const greyColor = Color(0xCC383636);
+  static const greenColor = Colors.green;
 }

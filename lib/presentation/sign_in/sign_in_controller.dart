@@ -1,3 +1,4 @@
+import 'package:car_rental/core/constants/const_strings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +39,7 @@ class SignInController extends GetxController {
       String? uid = await _authService.signInWithGoogle();
       if (uid != null) {
         userSession.getCurrentMember(userUid: uid);
+        await saveSharedPref(ConstString.userUidPrefKey, uid);
       }
       googleBtnController.stop();
       appSnackBar("success", 'login_success'.tr, "");
@@ -60,6 +62,7 @@ class SignInController extends GetxController {
           emailController.text, passwordController.text);
       if (uid != null) {
         userSession.getCurrentMember(userUid: uid);
+        await saveSharedPref(ConstString.userUidPrefKey, uid);
       }
       btnController.stop();
       appSnackBar('success', "login_success".tr, "");

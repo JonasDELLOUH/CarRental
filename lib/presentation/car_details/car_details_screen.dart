@@ -37,7 +37,8 @@ class CarDetailsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               myText(
-                  text: "${controller.car.value!.carBrand.carBrandName} ${controller.car.value!.carModel}",
+                  text:
+                      "${controller.car.value!.carBrand.carBrandName} ${controller.car.value!.carModel}",
                   fontSize: 25,
                   fontWeight: FontWeight.w600),
               const SizedBox(
@@ -85,7 +86,9 @@ class CarDetailsScreen extends StatelessWidget {
                       caracIconData: MyIcons.seatIconData(),
                       width: width * 0.15),
                   CarCaracCard(
-                      carac: controller.car.value!.isReserved ? 'reserved'.tr : 'available'.tr,
+                      carac: controller.car.value!.isReserved
+                          ? 'reserved'.tr
+                          : 'available'.tr,
                       caracIconData: controller.car.value!.isReserved
                           ? MyIcons.reserveIconData()
                           : MyIcons.availableIconData(),
@@ -99,11 +102,12 @@ class CarDetailsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   myText(
-                      text: "${controller.car.value!.rentalPrice * 0.3} cfa / ${'day'.tr}",
+                      text:
+                          "${controller.car.value!.rentalPrice} cfa / ${'day'.tr}",
                       fontSize: 15),
                   InkWell(
                     onTap: () {
-                      controller.redirectToPay();
+                      controller.redirectToRent();
                     },
                     child: Container(
                       padding: const EdgeInsets.all(5),
@@ -118,7 +122,7 @@ class CarDetailsScreen extends StatelessWidget {
                               bottomRight: Radius.circular(5))),
                       child: Center(
                         child: myText(
-                            text: 'reserve_now'.tr,
+                            text: 'rent_now'.tr,
                             color: ConstColors.backgroundColor),
                       ),
                     ),

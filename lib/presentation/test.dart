@@ -119,6 +119,7 @@ class _WritePostState extends State<WritePost> {
     // Navigator.pop(context);
     if (true) {
       Location reservation = Location(
+        nbrDayOfRent: 1,
           locationId: "",
           customer: Customer.defaultCustomer(),
           car: Car.defaultCar(),
