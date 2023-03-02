@@ -124,7 +124,7 @@ class _WritePostState extends State<WritePost> {
           customer: Customer.defaultCustomer(),
           car: Car.defaultCar(),
           locationDate: DateTime.now().millisecondsSinceEpoch.toInt());
-      ReservationServices reservationServices = ReservationServices();
+      LocationServices reservationServices = LocationServices();
       reservationServices.addToFirebase(reservation.toMap());
     }
   }

@@ -7,11 +7,12 @@ import '../models/location.dart';
 import '../widgets/text_widgets.dart';
 import 'date_handler.dart';
 
-Widget reservationCard({required Location reservation, required void Function() function}) {
+Widget locationCard(
+    {required Location location, required void Function() function}) {
   return Container(
-    margin: EdgeInsets.symmetric(vertical: 10),
-    padding: EdgeInsets.all(10),
-    decoration: BoxDecoration(
+    margin: const EdgeInsets.symmetric(vertical: 10),
+    padding: const EdgeInsets.all(10),
+    decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20),
@@ -26,14 +27,14 @@ Widget reservationCard({required Location reservation, required void Function() 
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Image.network(
-                reservation.car.carImageUrl,
+                location.car.carImageUrl,
                 fit: BoxFit.cover,
               ),
               Column(
                 children: [
                   myText(
                       text:
-                          "${reservation.car.carBrand.carBrandName} ${reservation.car.carModel}",
+                          "${location.car.carBrand.carBrandName} ${location.car.carModel}",
                       fontSize: 20,
                       fontWeight: FontWeight.bold),
                   const SizedBox(
@@ -41,65 +42,44 @@ Widget reservationCard({required Location reservation, required void Function() 
                   ),
                   Row(
                     children: [
-                      MyIcons.directionsCarFilled(color: ConstColors.blueColor, size: 20),
+                      MyIcons.directionsCarFilled(
+                          color: ConstColors.blueColor, size: 20),
                       myText(
-                          text:
-                              " ${reservation.car.nbrPlaces.toString()} places",
+                          text: " ${location.car.nbrPlaces.toString()} places",
                           fontSize: 20),
                     ],
                   ),
                   const SizedBox(
                     height: 2,
                   ),
-
                   myText(
                       text:
-                          "${'reserve_at'.tr} ${DateHandler.dateFormat(reservation.locationDate)}", fontSize: 12),
-                  SizedBox(height: 3,),
-                  InkWell(
-                    onTap: (){
-                      
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(5),
-                      // width: width * 0.45,
-                      decoration: const BoxDecoration(
-                          color: ConstColors.redColor,
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(3),
-                              topLeft: Radius.circular(3),
-                              bottomLeft: Radius.circular(3),
-                              bottomRight: Radius.circular(3))),
-                      child: Center(
-                        child: myText(
-                            text: 'to_free'.tr,
-                            color: ConstColors.backgroundColor, fontSize: 15),
-                      ),
-                    ),
-                  ),
+                          "${'reserve_at'.tr} ${DateHandler.dateFormat(location.locationDate)}",
+                      fontSize: 12),
                 ],
               )
             ],
           ),
         ),
-        Expanded(child: Row(
+        Expanded(
+            child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
-                MyIcons.attachMoney(
-                    color: ConstColors.blueColor
-                ),
-                myText(text: " ${reservation.car.rentalPrice*0.7} FCFA/${"day".tr}", fontSize: 12)
+                MyIcons.attachMoney(color: ConstColors.blueColor),
+                myText(
+                    text: " ${location.car.rentalPrice * 0.7} FCFA/${"day".tr}",
+                    fontSize: 12)
               ],
             ),
             InkWell(
               onTap: function,
               child: Container(
                 padding: const EdgeInsets.all(5),
-                // width: width * 0.45,
+                width: 100,
                 decoration: const BoxDecoration(
-                    color: ConstColors.blueColor,
+                    color: ConstColors.redColor,
                     borderRadius: BorderRadius.only(
                         topRight: Radius.circular(5),
                         topLeft: Radius.circular(5),
@@ -107,8 +87,9 @@ Widget reservationCard({required Location reservation, required void Function() 
                         bottomRight: Radius.circular(5))),
                 child: Center(
                   child: myText(
-                      text: 'rent_now'.tr,
-                      color: ConstColors.backgroundColor, fontSize: 15),
+                      text: 'to_free'.tr,
+                      color: ConstColors.backgroundColor,
+                      fontSize: 15),
                 ),
               ),
             )

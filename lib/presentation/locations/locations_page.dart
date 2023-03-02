@@ -27,10 +27,10 @@ class LocationsPage extends StatelessWidget {
       body: Container(
         margin: const EdgeInsets.all(15),
         child: Obx(() => controller.isLoading.value ? CommonLoading(size.width ,
-          size.height * 0.8,) : controller.reservations.isEmpty
+          size.height * 0.8,) : controller.locations.isEmpty
             ? Center(child: myText(text: 'no_car_rented'.tr, fontSize: 50),)
             : reservationsView(
-                context: context, reservations: controller.reservations)),
+                context: context, reservations: controller.locations)),
       ),
     );
   }
@@ -46,8 +46,8 @@ class LocationsPage extends StatelessWidget {
                   : 2,
           childAspectRatio: 1.5),
       itemBuilder: (BuildContext context, index) {
-        return reservationCard(
-            reservation: reservations[index], function: () {});
+        return locationCard(
+            location: reservations[index], function: () {});
       },
       itemCount: reservations.length,
     );

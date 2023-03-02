@@ -80,7 +80,8 @@ class WordLanguage extends Translations {
           'nbr_rent_day': "Number of rental days",
           'total': "Total",
           'pay': "Pay",
-          'log_out': "Log out"
+          'log_out': "Log out",
+          'location_added': "Location added"
         },
         'fr_FR': {
           'sign': 'Connectez-vous à votre compte',
@@ -161,7 +162,8 @@ class WordLanguage extends Translations {
           'nbr_rent_day': " Nombre de jour de location",
           'total': "Total",
           'pay': "Payer",
-          'log_out': "Se déconnecter"
+          'log_out': "Se déconnecter",
+          'location_added': "Location ajoutée"
         }
       };
 }

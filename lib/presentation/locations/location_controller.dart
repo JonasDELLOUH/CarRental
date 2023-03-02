@@ -6,7 +6,7 @@ import '../../core/models/location.dart';
 import '../../core/services/location_services.dart';
 
 class LocationController extends GetxController {
-  RxList<Location> reservations = RxList<Location>();
+  RxList<Location> locations = RxList<Location>();
   final userSession = Get.find<UserSessionServiceInjected>();
   RxBool isLoading = false.obs;
 
@@ -18,11 +18,11 @@ class LocationController extends GetxController {
 
   getLocations() async {
     isLoading.value = true;
-    final reservationServices = ReservationServices();
-    List l = await reservationServices.getCollectionToMap(
+    final locationsServices = LocationServices();
+    List l = await locationsServices.getCollectionToMap(
         fieldName: FirestoreConstants.customer,
         value: userSession.customer.value!.customerId);
     isLoading.value = false;
-    reservations.value = Location.toList(l);
+    locations.value = Location.toList(l);
   }
 }

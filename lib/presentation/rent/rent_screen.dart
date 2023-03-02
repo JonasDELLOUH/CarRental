@@ -53,6 +53,7 @@ class RentScreen extends StatelessWidget {
                       minVal: 1,
                       btnColor1: ConstColors.blueColor,
                       onQtyChanged: (val) {
+                        controller.nbrDay.value = val!.toInt();
                         controller.updateTotal(val!.toInt());
                       },
                     ),
@@ -78,7 +79,9 @@ class RentScreen extends StatelessWidget {
                       height: 20,
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        controller.addLocation();
+                      },
                       child: Container(
                         padding: const EdgeInsets.all(5),
                         height: 50,

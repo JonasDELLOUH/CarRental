@@ -6,8 +6,8 @@ import 'base.dart';
 import 'car_services.dart';
 import 'customer_services.dart';
 
-class ReservationServices extends BaseServices {
-  ReservationServices() {
+class LocationServices extends BaseServices {
+  LocationServices() {
     super.collectionName = FirestoreConstants.location;
   }
 
