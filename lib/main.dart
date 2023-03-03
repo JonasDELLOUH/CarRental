@@ -29,8 +29,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      // supportedLocales: const [Locale('en', 'US'), Locale('fr', 'FR')],
       translations: WordLanguage(),
-      locale: const Locale('en', 'US'),
+      locale: const Locale('fr', 'FR'),
+      fallbackLocale: const Locale('en', 'US'),
       initialRoute: AppLinks.splash1Route,
       getPages: AppRouting.routes,
     );

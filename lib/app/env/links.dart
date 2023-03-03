@@ -11,4 +11,5 @@ class AppLinks {
   static const String signUpAsCustomerRoute = "/sign_up_as_customer_route";
   static const String profileRoute = "/profile_route";
   static const String rentRoute = '/rent_route';
+  static const searchPageRoute = '/search_page_route';
 }

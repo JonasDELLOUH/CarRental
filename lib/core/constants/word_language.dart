@@ -81,7 +81,8 @@ class WordLanguage extends Translations {
           'total': "Total",
           'pay': "Pay",
           'log_out': "Log out",
-          'location_added': "Location added"
+          'location_added': "Location added",
+          'have_account': "Already have an account? "
         },
         'fr_FR': {
           'sign': 'Connectez-vous à votre compte',
@@ -163,7 +164,8 @@ class WordLanguage extends Translations {
           'total': "Total",
           'pay': "Payer",
           'log_out': "Se déconnecter",
-          'location_added': "Location ajoutée"
+          'location_added': "Location ajoutée",
+          'have_account': "Vous avez un compte? "
         }
       };
 }

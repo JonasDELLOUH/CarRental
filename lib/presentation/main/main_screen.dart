@@ -42,12 +42,6 @@ class MainScreen extends GetWidget<MainController> {
                     },
                     selected: controller.selectedWidgetIndex.value == 2),
               BarItem(
-                  iconData: MyIcons.notificationIconData(),
-                  onPressed: () {
-                    controller.selectedWidgetIndex.value = 3;
-                  },
-                  selected: controller.selectedWidgetIndex.value == 3),
-              BarItem(
                   iconData: MyIcons.settingIconData(),
                   onPressed: () {
                     controller.selectedWidgetIndex.value = 4;
@@ -66,8 +60,6 @@ class MainScreen extends GetWidget<MainController> {
         return HomeScreen();
       case 2:
           return LocationsPage();
-      case 3:
-        return const NotificationsPage();
       case 4:
         return SettingsScreen();
       default:

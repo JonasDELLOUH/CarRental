@@ -22,6 +22,7 @@ class CarDetailsScreen extends StatelessWidget {
     final orientation = MediaQuery.of(context).orientation;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: ConstColors.secondaryColor,
         leading: IconButton(
           icon: MyIcons.leadingIcon(),
           onPressed: () {
@@ -114,7 +115,7 @@ class CarDetailsScreen extends StatelessWidget {
                       height: 50,
                       // width: width * 0.45,
                       decoration: const BoxDecoration(
-                          color: ConstColors.blueColor,
+                          color: ConstColors.secondaryColor,
                           borderRadius: BorderRadius.only(
                               topRight: Radius.circular(5),
                               topLeft: Radius.circular(5),

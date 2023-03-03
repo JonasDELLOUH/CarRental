@@ -16,14 +16,8 @@ class SignUpAsCustomerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery
-        .of(context)
-        .size
-        .height;
-    double width = MediaQuery
-        .of(context)
-        .size
-        .width;
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -60,8 +54,7 @@ class SignUpAsCustomerScreen extends StatelessWidget {
                 },
                 child: Card(
                   child: Obx(
-                        () =>
-                    controller.identityFile.value == null
+                    () => controller.identityFile.value == null
                         ? myText(text: 'add_identity_file'.tr)
                         : myText(text: controller.identityFile.value!.path),
                   ),
@@ -91,7 +84,7 @@ class SignUpAsCustomerScreen extends StatelessWidget {
                         takePicture(ImageSource.gallery);
                       },
                       child:
-                      MyIcons.libraryAddIcon(color: ConstColors.whiteColor))
+                          MyIcons.libraryAddIcon(color: ConstColors.whiteColor))
                 ],
               ),
               const SizedBox(
@@ -100,16 +93,16 @@ class SignUpAsCustomerScreen extends StatelessWidget {
               SizedBox(
                 height: height * 0.2,
                 child: Center(
-                  child: Obx(() =>
-                  controller.memberImage.value != null
-                      ? ClipRRect(
-                      borderRadius: const BorderRadius.only(
-                          topRight: Radius.circular(8),
-                          topLeft: Radius.circular(8),
-                          bottomLeft: Radius.circular(8),
-                          bottomRight: Radius.circular(8)),
-                      child: Image.file(controller.memberImage.value!))
-                      : myText(text: 'no_image'.tr),
+                  child: Obx(
+                    () => controller.memberImage.value != null
+                        ? ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                                topRight: Radius.circular(8),
+                                topLeft: Radius.circular(8),
+                                bottomLeft: Radius.circular(8),
+                                bottomRight: Radius.circular(8)),
+                            child: Image.file(controller.memberImage.value!))
+                        : myText(text: 'no_image'.tr),
                   ),
                 ),
               ),
@@ -118,7 +111,7 @@ class SignUpAsCustomerScreen extends StatelessWidget {
               ),
               RoundedLoadingButton(
                 width: width * 0.8,
-                color: ConstColors.blueColor,
+                color: ConstColors.secondaryColor,
                 height: 50,
                 controller: controller.btnController,
                 onPressed: () {
@@ -147,11 +140,10 @@ class SignUpAsCustomerScreen extends StatelessWidget {
     controller.memberImage.value = file;
   }
 
-
-takeFile() async {
-  final result = await FilePicker.platform.pickFiles(allowMultiple: false);
-  if (result != null) {
-    controller.identityFile.value = File(result.files.single.path!);
+  takeFile() async {
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+    if (result != null) {
+      controller.identityFile.value = File(result.files.single.path!);
+    }
   }
-}
 }

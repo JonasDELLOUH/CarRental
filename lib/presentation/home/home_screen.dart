@@ -1,9 +1,6 @@
 import 'package:car_rental/app/env/links.dart';
 import 'package:car_rental/presentation/home/home_controller.dart';
 
-import 'package:car_rental/presentation/car_details/car_details_screen.dart';
-import 'package:car_rental/presentation/searchpage/search_page.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -37,7 +34,7 @@ class HomeScreen extends StatelessWidget {
     final orientation = MediaQuery.of(context).orientation;
     return Scaffold(
       appBar: AppBar(
-        // leading: null,
+        backgroundColor: ConstColors.secondaryColor,
         title: const Text("RENTALCAR"),
       ),
       body: Container(
@@ -64,7 +61,7 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     myText(
                         text: 'home_express1'.tr,
-                        color: ConstColors.blueColor,
+                        color: ConstColors.secondaryColor,
                         fontWeight: FontWeight.bold),
                     const SizedBox(
                       height: 10,
@@ -85,10 +82,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       child: InkWell(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SearchPage()));
+                         Get.toNamed(AppLinks.searchPageRoute);
                         },
                         child: Row(
                           children: [

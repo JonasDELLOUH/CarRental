@@ -39,9 +39,10 @@ class CarServices extends BaseServices {
   }
 
   @override
-  Future<List> getCollectionToMap({String fieldName = "", dynamic value}) async {
+  Future<List> getCollectionToMap(
+      {String fieldName = "", dynamic value}) async {
     CarBrandService carBrandService = CarBrandService();
-    List l = await super.getCollectionToMap();
+    List l = await super.getCollectionToMap(fieldName: fieldName, value: value);
     for (dynamic car in l) {
       Map<String, dynamic>? map = await carBrandService.getDocumentToMap(
           document: car[FirestoreConstants.carBrand]);
@@ -53,13 +54,14 @@ class CarServices extends BaseServices {
   @override
   Future<Map<String, dynamic>?> getDocumentToMap(
       {String document = "",
-        String whereValue = "",
-        String whereField = ""}) async {
-    Map<String, dynamic>? map = await super.getDocumentToMap(document: document, whereValue: whereValue, whereField: whereField);
-    if(map != null || map!.isNotEmpty){
+      String whereValue = "",
+      String whereField = ""}) async {
+    Map<String, dynamic>? map = await super.getDocumentToMap(
+        document: document, whereValue: whereValue, whereField: whereField);
+    if (map != null || map!.isNotEmpty) {
       CarBrandService carBrandService = CarBrandService();
-      Map<String, dynamic>? map2 =
-      await carBrandService.getDocumentToMap(document: map[FirestoreConstants.carBrand]);
+      Map<String, dynamic>? map2 = await carBrandService.getDocumentToMap(
+          document: map[FirestoreConstants.carBrand]);
       map![FirestoreConstants.carBrand] = map2;
     }
     return map;
@@ -69,62 +71,39 @@ class CarServices extends BaseServices {
       Stream.periodic(const Duration(seconds: 5))
           .asyncMap((event) => getCars());
 
-  Future<List<Car>> getCarsWithFilter(
+  Future<List> getCarsWithFilter(
       {String model = "",
       String brand = "",
       String price = "",
       String places = ""}) async {
     List<Car> carList = [];
+    List l = [];
     QuerySnapshot querySnapshot;
     print("yesssssss voici model : $model");
     if (model.isNotEmpty) {
       print("model is not empty");
-      querySnapshot = await firestoreInstance
-          .collection(collectionName)
-          .where(FirestoreConstants.carModel, isEqualTo: model)
-          .get();
-    }
-    // if(brand.isNotEmpty){
-    //   querySnapshot =
-    //   await firestoreInstance.collection(collectionName).where(FirestoreConstants.carBrandName, arrayContains: "v").get();
-    // }
-    else if (places.isNotEmpty) {
-      querySnapshot = await firestoreInstance
-          .collection(collectionName)
-          .where(FirestoreConstants.nbrPlaces,
-              isGreaterThanOrEqualTo: int.parse(places))
-          .get();
-    } else if (price.isNotEmpty) {
-      querySnapshot = await firestoreInstance
-          .collection(collectionName)
-          .where(FirestoreConstants.rentalPrice,
-              isLessThanOrEqualTo: double.parse(price))
-          .get();
+      l = await getCollectionToMap(
+          fieldName: FirestoreConstants.carModel, value: model);
+    } else if (places.isNotEmpty) {
+      l = await getCollectionToMap(
+          fieldName: FirestoreConstants.nbrPlaces, value: int.parse(places));
+    } else if (brand.isNotEmpty) {}
+    if (price.isNotEmpty) {
+      l = await getCollectionToMap(
+          fieldName: FirestoreConstants.rentalPrice,
+          value: double.parse(price));
     } else {
-      querySnapshot = await firestoreInstance.collection(collectionName).get();
+      l = await getCollectionToMap();
     }
-
-    for (DocumentSnapshot documentSnapshot in querySnapshot.docs) {
-      Map<String, dynamic> data =
-          documentSnapshot.data()! as Map<String, dynamic>;
-
-      CarBrandService carBrandService = CarBrandService();
-      Map<String, dynamic>? map = {};
-      map = await carBrandService.getDocumentToMap(
-          document: data[FirestoreConstants.carBrand]);
-      data[FirestoreConstants.carBrand] = map;
-      Car car = Car.basicFromMap(data);
-      carList.add(car);
-    }
-    return carList;
+    return l;
   }
 
-  Stream<List<Car>> getCarsWithFilterStream(
-          {String model = "",
-          String brand = "",
-          String price = "",
-          String places = ""}) =>
-      Stream.periodic(const Duration(milliseconds: 1)).asyncMap((event) =>
-          getCarsWithFilter(
-              model: model, brand: brand, price: price, places: places));
+// Stream<List<Car>> getCarsWithFilterStream(
+//         {String model = "",
+//         String brand = "",
+//         String price = "",
+//         String places = ""}) =>
+//     Stream.periodic(const Duration(milliseconds: 1)).asyncMap((event) =>
+//         getCarsWithFilter(
+//             model: model, brand: brand, price: price, places: places));
 }

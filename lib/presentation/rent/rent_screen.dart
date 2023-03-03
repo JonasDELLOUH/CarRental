@@ -15,7 +15,7 @@ class RentScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: ConstColors.blueColor,
+          backgroundColor: ConstColors.secondaryColor,
         ),
         body: Container(
           child: Stack(
@@ -41,7 +41,7 @@ class RentScreen extends StatelessWidget {
                   children: [
                     SizedBox(height: height * 0.4),
                     myText(
-                        text: 'nbr_rent_day'.tr, color: ConstColors.blueColor),
+                        text: 'nbr_rent_day'.tr, color: ConstColors.secondaryColor),
                     const SizedBox(
                       height: 20,
                     ),
@@ -51,7 +51,7 @@ class RentScreen extends StatelessWidget {
                       steps: 1,
                       showMessageLimit: true,
                       minVal: 1,
-                      btnColor1: ConstColors.blueColor,
+                      btnColor1: ConstColors.secondaryColor,
                       onQtyChanged: (val) {
                         controller.nbrDay.value = val!.toInt();
                         controller.updateTotal(val!.toInt());
@@ -62,7 +62,7 @@ class RentScreen extends StatelessWidget {
                     ),
                     myText(
                         text: 'total'.tr,
-                        color: ConstColors.blueColor,
+                        color: ConstColors.secondaryColor,
                         fontSize: 40),
                     const SizedBox(
                       height: 10,
@@ -87,7 +87,7 @@ class RentScreen extends StatelessWidget {
                         height: 50,
                         width: width * 0.45,
                         decoration: const BoxDecoration(
-                            color: ConstColors.blueColor,
+                            color: ConstColors.secondaryColor,
                             borderRadius: BorderRadius.only(
                                 topRight: Radius.circular(5),
                                 topLeft: Radius.circular(5),

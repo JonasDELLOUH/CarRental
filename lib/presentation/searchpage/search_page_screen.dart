@@ -1,31 +1,19 @@
+import 'package:car_rental/presentation/searchpage/search_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wp_search_bar/wp_search_bar.dart';
 
+import '../../core/constants/colors.dart';
 import '../../core/constants/my_icons.dart';
 import '../../core/models/car.dart';
 import '../../core/services/car_services.dart';
 import '../../core/utility/car_card.dart';
 import '../car_details/car_details_screen.dart';
 
-class SearchPage extends StatefulWidget {
-  const SearchPage({Key? key}) : super(key: key);
-
-  @override
-  State<SearchPage> createState() => _SearchPageState();
-}
-
-class _SearchPageState extends State<SearchPage> {
-  List<Car> cars = [];
+class SearchPageScreen extends StatelessWidget {
+  SearchPageScreen({Key? key}) : super(key: key);
+  final controller = Get.find<SearchPageController>();
   CarServices carServices = CarServices();
-  late int choice;
-  String values = "";
-
-  @override
-  void initState() {
-    choice = 0;
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +24,7 @@ class _SearchPageState extends State<SearchPage> {
       body: WPSearchBar(
         // iconTheme: const IconThemeData(color: ConstColors.blueColor),
         // appBarForegroundColor: ConstColors.blueColor,
-        // appBarBackgroundColor: ConstColors.backgroundColor,
+        appBarBackgroundColor: ConstColors.secondaryColor,
         listOfFilters: {
           'model': {
             'name': 'model',
@@ -70,77 +58,49 @@ class _SearchPageState extends State<SearchPage> {
         materialDesign: {
           'title': {'text': "${'search_cars'.tr}s"}
         },
-        onSearch: (filter, value, operation) {
-          setState(() {
-            if (filter == 'model') {
-              print("choice ...1");
-              choice = 1;
-              values = value!;
-            }
+        onSearch: (filter, value, operation) async {
+          if (filter == 'model') {
+            print("value....: "+value.toString());
+            List l = await carServices.getCarsWithFilter(model: value!);
+            controller.cars.value = Car.toList(l);
+          }
+          if (filter == 'brand') {
+            List l = await carServices.getCarsWithFilter(brand: value!);
+            controller.cars.value = Car.toList(l);
+          }
 
-            if (filter == 'brand') {
-              choice = 2;
-              values = value!;
-            }
-
-            if (filter == 'nb_places') {
-              choice = 3;
-              values = value!;
-            }
-
-            if (filter == 'price') {
-              choice = 4;
-              values = value!;
-            }
-          });
-          print(choice);
-          print("voici la value : $value");
+          if (filter == 'nb_places') {
+            print("placesss");
+            List l = await carServices.getCarsWithFilter(places: value!);
+            controller.cars.value = Car.toList(l);
+          }
+          if (filter == 'price') {
+            List l = await carServices.getCarsWithFilter(price: value!);
+            controller.cars.value = Car.toList(l);
+          }
         },
         body: Container(
           margin: const EdgeInsets.all(15),
-          child: StreamBuilder<List<Car>>(
-            // stream: carServices.getCollectionStream(),
-            stream: choice == 1
-                ? carServices.getCarsWithFilterStream(model: values)
-                : choice == 2
-                    ? carServices.getCarsWithFilterStream(brand: values)
-                    : choice == 3
-                        ? carServices.getCarsWithFilterStream(places: values)
-                        : choice == 4
-                            ? carServices.getCarsWithFilterStream(price: values)
-                            : carServices.getCarsStream(),
-            builder: (BuildContext context, AsyncSnapshot<List<Car>> snapshot) {
-              if (snapshot.hasError) {
-                return const Text('Something went wrong');
-              }
-
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Text("Loading");
-              }
-              if (snapshot.hasData) {}
-              cars = snapshot.data!;
-              return GridView.builder(
+          child: Obx(() => GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount:
                         (orientation == Orientation.portrait) ? 2 : 3,
                     childAspectRatio: 0.75),
                 itemBuilder: (BuildContext context, index) {
                   return CarCard(
-                      car: cars[index],
+                      car: controller.cars.value![index],
                       height: height * 0.51,
                       function: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    CarDetailsScreen(car: cars[index])));
+                                builder: (context) => CarDetailsScreen(
+                                    car: controller.cars.value![index])));
                       });
                 },
-                itemCount: cars.length,
+                itemCount: controller.cars.value!.length,
                 shrinkWrap: true,
-              );
-            },
-          ),
+              )),
         ),
       ),
     );

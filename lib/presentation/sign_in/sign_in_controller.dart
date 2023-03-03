@@ -43,7 +43,7 @@ class SignInController extends GetxController {
       }
       googleBtnController.stop();
       appSnackBar("success", 'login_success'.tr, "");
-      Get.toNamed(AppLinks.splash2Route);
+      Get.offAllNamed(AppLinks.splash2Route);
     } on FirebaseAuthException catch (e, strace) {
       googleBtnController.stop();
       if (e.code == 'network-request-failed') {
@@ -66,7 +66,7 @@ class SignInController extends GetxController {
       }
       btnController.stop();
       appSnackBar('success', "login_success".tr, "");
-      Get.toNamed(AppLinks.splash2Route);
+      Get.offAllNamed(AppLinks.splash2Route);
     } on FirebaseAuthException catch (e, strace) {
       btnController.stop();
       if (e.code == 'network-request-failed') {

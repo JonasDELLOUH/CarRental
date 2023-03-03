@@ -24,6 +24,7 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: myText(text: 'settings'.tr),
+          backgroundColor: ConstColors.secondaryColor,
           elevation: 0.0,
         ),
         body: Container(

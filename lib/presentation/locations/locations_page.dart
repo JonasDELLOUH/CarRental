@@ -3,6 +3,7 @@ import 'package:car_rental/core/widgets/text_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../core/constants/colors.dart';
 import '../../core/models/location.dart';
 import '../../core/utility/reservation_card.dart';
 import '../../core/utility/size_utils.dart';
@@ -23,6 +24,7 @@ class LocationsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: myText(text: 'reservation'.tr),
+        backgroundColor: ConstColors.secondaryColor,
       ),
       body: Container(
         margin: const EdgeInsets.all(15),

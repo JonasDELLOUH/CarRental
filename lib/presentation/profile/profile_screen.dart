@@ -29,7 +29,7 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         title: myText(text: 'profile'.tr),
         elevation: 0.0,
-        backgroundColor: ConstColors.blueColor,
+        backgroundColor: ConstColors.secondaryColor,
       ),
       body: Container(
         margin: const EdgeInsets.all(15),
@@ -47,7 +47,7 @@ class ProfileScreen extends StatelessWidget {
                       },
                       child: CircularProfileAvatar(
                         '',
-                        borderColor: ConstColors.blueColor,
+                        borderColor: ConstColors.secondaryColor,
                         borderWidth: 5,
                         elevation: 2,
                         radius: width * 0.25,
@@ -105,7 +105,7 @@ class ProfileScreen extends StatelessWidget {
                     height: 50,
                     width: width * 0.5,
                     decoration: const BoxDecoration(
-                        color: ConstColors.blueColor,
+                        color: ConstColors.secondaryColor,
                         borderRadius: BorderRadius.only(
                             topRight: Radius.circular(5),
                             topLeft: Radius.circular(5),

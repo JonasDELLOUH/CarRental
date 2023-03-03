@@ -52,7 +52,7 @@ Widget settingTile(
                   icon: Icon(
                     trailingIconData,
                     size: 40,
-                    color: ConstColors.blueColor,
+                    color: ConstColors.secondaryColor,
                   ),
                   onPressed: () {
                     showDialog<void>(
@@ -73,7 +73,7 @@ Widget settingTile(
                                   },
                                   child: myText(
                                       text: 'cancel'.tr,
-                                      color: ConstColors.blueColor)),
+                                      color: ConstColors.secondaryColor)),
                               TextButton(
                                   onPressed: () {
                                     trailingAction!();
@@ -81,7 +81,7 @@ Widget settingTile(
                                   },
                                   child: myText(
                                       text: 'edit'.tr,
-                                      color: ConstColors.blueColor))
+                                      color: ConstColors.secondaryColor))
                             ],
                           );
                         });

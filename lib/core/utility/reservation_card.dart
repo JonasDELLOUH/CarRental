@@ -22,41 +22,47 @@ Widget locationCard(
     child: Column(
       children: [
         Expanded(
-          flex: 2,
+          flex: 3,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Image.network(
-                location.car.carImageUrl,
-                fit: BoxFit.cover,
+              Expanded(
+                child: Image.network(
+                  location.car.carImageUrl,
+                  fit: BoxFit.cover,
+                ),
               ),
-              Column(
-                children: [
-                  myText(
-                      text:
-                          "${location.car.carBrand.carBrandName} ${location.car.carModel}",
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                  const SizedBox(
-                    height: 1,
-                  ),
-                  Row(
-                    children: [
-                      MyIcons.directionsCarFilled(
-                          color: ConstColors.blueColor, size: 20),
-                      myText(
-                          text: " ${location.car.nbrPlaces.toString()} places",
-                          fontSize: 20),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 2,
-                  ),
-                  myText(
-                      text:
-                          "${'reserve_at'.tr} ${DateHandler.dateFormat(location.locationDate)}",
-                      fontSize: 12),
-                ],
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    myText(
+                        text:
+                            "${location.car.carBrand.carBrandName} ${location.car.carModel}",
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                    const SizedBox(
+                      height: 1,
+                    ),
+                    Row(
+                      children: [
+                        MyIcons.directionsCarFilled(
+                            color: ConstColors.secondaryColor, size: 20),
+                        myText(
+                            text:
+                                " ${location.car.nbrPlaces.toString()} places",
+                            fontSize: 20),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 2,
+                    ),
+                    myText(
+                        text:
+                            "${'reserve_at'.tr} ${DateHandler.dateFormat(location.locationDate)}",
+                        fontSize: 20,
+                        textAlign: TextAlign.center),
+                  ],
+                ),
               )
             ],
           ),
@@ -67,7 +73,7 @@ Widget locationCard(
           children: [
             Row(
               children: [
-                MyIcons.attachMoney(color: ConstColors.blueColor),
+                MyIcons.attachMoney(color: ConstColors.secondaryColor),
                 myText(
                     text: " ${location.car.rentalPrice * 0.7} FCFA/${"day".tr}",
                     fontSize: 12)

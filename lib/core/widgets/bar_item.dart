@@ -13,7 +13,7 @@ class BarItem extends IconButton {
       : super(
           icon: Icon(
             iconData,
-            color: selected ? ConstColors.blueColor : ConstColors.primaryColor,
+            color: selected ? ConstColors.secondaryColor : ConstColors.primaryColor,
             size: size,
           ),
           onPressed: onPressed,

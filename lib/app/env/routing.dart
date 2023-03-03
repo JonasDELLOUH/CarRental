@@ -8,6 +8,7 @@ import 'package:car_rental/presentation/profile/profile_binding.dart';
 import 'package:car_rental/presentation/profile/profile_screen.dart';
 import 'package:car_rental/presentation/rent/rent_bindings.dart';
 import 'package:car_rental/presentation/rent/rent_screen.dart';
+import 'package:car_rental/presentation/searchpage/search_page_binding.dart';
 import 'package:car_rental/presentation/settings/settings_binding.dart';
 import 'package:car_rental/presentation/settings/settings_screen.dart';
 import 'package:car_rental/presentation/sign_in/sign_in_screen.dart';
@@ -21,6 +22,7 @@ import 'package:get/get.dart';
 import '../../presentation/locations/location_binding.dart';
 import '../../presentation/locations/locations_page.dart';
 import '../../presentation/main/main_binding.dart';
+import '../../presentation/searchpage/search_page_screen.dart';
 import '../../presentation/sign_up_as_customer/sign_up_as_customer_binding.dart';
 import '../../presentation/sign_up_as_customer/sign_up_as_customer_screen.dart';
 import '../../presentation/splash2/splash2_binding.dart';
@@ -77,6 +79,10 @@ class AppRouting {
     GetPage(
         name: AppLinks.rentRoute,
         page: () => RentScreen(),
-        binding: RentBindings())
+        binding: RentBindings()),
+    GetPage(
+        name: AppLinks.searchPageRoute,
+        page: () => SearchPageScreen(),
+        binding: SearchPageBindings())
   ];
 }

@@ -59,7 +59,7 @@ Widget CarCard({required Car car, required double height, required void Function
                 Row(
                   children: [
                     MyIcons.directionsCarFilled(
-                      color: ConstColors.blueColor
+                      color: ConstColors.secondaryColor
                     ),
                     myText(text: " ${car.nbrPlaces.toString()} places", fontSize: 15),
                   ],
@@ -68,7 +68,7 @@ Widget CarCard({required Car car, required double height, required void Function
                 Row(
                   children: [
                     MyIcons.attachMoney(
-                        color: ConstColors.blueColor
+                        color: ConstColors.secondaryColor
                     ),
                     myText(text: " ${car.rentalPrice} FCFA/${"day".tr}", fontSize: 12)
                   ],
