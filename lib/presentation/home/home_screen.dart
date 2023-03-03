@@ -116,26 +116,6 @@ class HomeScreen extends StatelessWidget {
               ),
               Container(
                 height: height * 0.51,
-                // color: Colors.blue,
-                // child: StreamBuilder<List<Car>>(
-                //         stream: carServices.getCarsStream(),
-                //         builder: (BuildContext context,
-                //             AsyncSnapshot<List<Car>> snapshot) {
-                //           if (snapshot.hasError) {
-                //             return const Text('Something went wrong');
-                //           }
-                //
-                //           if (snapshot.connectionState ==
-                //               ConnectionState.waiting) {
-                //             return carsView(
-                //                 context: context,
-                //                 carList: _splash2Controller.defaultCarList.value!);
-                //           }
-                //           if (snapshot.hasData) {}
-                //           cars = snapshot.data!;
-                //           return carsView(context: context, carList: cars);
-                //         },
-                //       ),
                 child: Obx(() => controller.cars.isEmpty
                     ? CommonLoading(
                         size.width,
@@ -178,6 +158,7 @@ class HomeScreen extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         // print("Les categories : ${jobCategories}");
         return CarBrandCard(
+            // onTap: controller.getCarrWithCarBrand(carBrandId: carBrands[index].carBrandId),
             carBrand: carBrands[index],
             height: MediaQuery.of(context).size.height * 0.1);
       },

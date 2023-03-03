@@ -30,7 +30,12 @@ class SignInScreen extends StatelessWidget {
             Container(
               height: height * 0.4,
               color: Colors.blue,
-              child: Image.asset(Assets.imagesWelcome, height: height * 0.3, width: width, fit: BoxFit.cover,),
+              child: Image.asset(
+                Assets.imagesLogo1,
+                height: height * 0.3,
+                width: width,
+                fit: BoxFit.cover,
+              ),
             ),
             Form(
               key: formKey,
@@ -90,7 +95,9 @@ class SignInScreen extends StatelessWidget {
                         controller: controller.passwordController,
                         hintText: ConstString.passwordIllust,
                         validator: (String? value) {
-                          return value!.isEmpty ? "field_must_be_filled".tr : null;
+                          return value!.isEmpty
+                              ? "field_must_be_filled".tr
+                              : null;
                         }),
                     const SizedBox(
                       height: 10,

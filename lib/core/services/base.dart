@@ -105,6 +105,38 @@ abstract class BaseServices {
     }
   }
 
+  // Future<void> updateDocument(
+  //     {required String document,
+  //     required String fieldName,
+  //     required dynamic value}) async {
+  //   final reference =
+  //       FirebaseFirestore.instance.collection(collectionName).doc(document);
+  //
+  //   try {
+  //     await reference.update({fieldName: value});
+  //     print('Donnée mise à jour avec succès !');
+  //   } on TimeoutException catch (e, strace) {
+  //     appSnackBar("error", "is_time_out_exception".tr, "");
+  //     print(e);
+  //     print(strace);
+  //   } on SocketException catch (e, strace) {
+  //     appSnackBar("error", "is_socketException".tr, "");
+  //     print(e);
+  //     print(strace);
+  //   } on PlatformException catch (e, strace) {
+  //     appSnackBar("error", "is_platform_exception".tr, "");
+  //     print(e);
+  //     print(strace);
+  //   } on FirebaseException catch (e, strace) {
+  //     appSnackBar("error", "is_firebase_exception".tr, "");
+  //     print(e);
+  //     print(strace);
+  //   } catch (e, strace) {
+  //     print(e);
+  //     print(strace);
+  //   }
+  // }
+
   Future<Map<String, dynamic>?> getDocumentToMap(
       {String document = "",
       String whereValue = "",
@@ -169,18 +201,18 @@ abstract class BaseServices {
   // }
 
   Future<List> getCollectionToMap(
-      {String fieldName = "", dynamic value}) async {
+      {String fieldName = "", dynamic value, int limit = 5}) async {
     List datas = [];
     QuerySnapshot querySnapshot;
     try {
       if (fieldName.isNotEmpty) {
         querySnapshot = await FirebaseFirestore.instance
             .collection(collectionName)
-            .where(fieldName, isEqualTo: value)
+            .where(fieldName, isEqualTo: value).limit(limit)
             .get();
       } else {
         querySnapshot =
-            await FirebaseFirestore.instance.collection(collectionName).get();
+            await FirebaseFirestore.instance.collection(collectionName).limit(limit).get();
       }
 
       for (final DocumentSnapshot documentSnapshot in querySnapshot.docs) {

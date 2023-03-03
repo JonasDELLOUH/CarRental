@@ -12,6 +12,7 @@ class UserSessionServiceInjected extends GetxService {
   Rxn<Customer> customer = Rxn<Customer>();
   MemberServices memberServices = MemberServices();
   CustomerServices customerServices = CustomerServices();
+  RxString userUId = "".obs;
 
   getCurrentMember({required String userUid}) async {
     Map<String, dynamic>? map = {};

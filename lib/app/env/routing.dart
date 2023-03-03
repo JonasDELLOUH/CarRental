@@ -41,6 +41,10 @@ class AppRouting {
         page: () => SignUpScreen(),
         binding: SignUpBinding()),
     GetPage(
+        name: AppLinks.splash2Route,
+        page: () => Splash2Screen(),
+        binding: Splash2Binding()),
+    GetPage(
         name: AppLinks.mainRoute,
         page: () => MainScreen(),
         binding: MainBinding()),
@@ -52,10 +56,6 @@ class AppRouting {
         name: AppLinks.splash1Route,
         page: () => const Splash1Screen(),
         binding: Splash1Binding()),
-    GetPage(
-        name: AppLinks.splash2Route,
-        page: () => const Splash2Screen(),
-        binding: Splash2Binding()),
     GetPage(
         name: AppLinks.locationRoute,
         page: () => LocationsPage(),

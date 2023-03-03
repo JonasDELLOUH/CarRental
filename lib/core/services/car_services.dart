@@ -40,9 +40,10 @@ class CarServices extends BaseServices {
 
   @override
   Future<List> getCollectionToMap(
-      {String fieldName = "", dynamic value}) async {
+      {String fieldName = "", dynamic value, int limit = 5}) async {
     CarBrandService carBrandService = CarBrandService();
-    List l = await super.getCollectionToMap(fieldName: fieldName, value: value);
+    List l = await super
+        .getCollectionToMap(fieldName: fieldName, value: value, limit: limit);
     for (dynamic car in l) {
       Map<String, dynamic>? map = await carBrandService.getDocumentToMap(
           document: car[FirestoreConstants.carBrand]);

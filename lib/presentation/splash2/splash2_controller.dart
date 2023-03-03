@@ -1,8 +1,13 @@
+import 'package:car_rental/app/getxservice/user_session_injected.dart';
 import 'package:get/get.dart';
 
 import '../../app/env/links.dart';
+import '../../core/constants/const_strings.dart';
+import '../../core/utility/functions.dart';
 
 class Splash2Controller extends GetxController {
+  final userSession = Get.find<UserSessionServiceInjected>();
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -12,11 +17,10 @@ class Splash2Controller extends GetxController {
 
   @override
   Future<void> onReady() async {
-    // TODO: implement onReady
     super.onReady();
-    Future.delayed(const Duration(seconds: 1), () {
-      Get.offNamed(AppLinks.mainRoute);
-    });
+    await userSession.getCurrentMember(userUid: userSession.userUId.value);
+    await saveSharedPref(ConstString.userUidPrefKey, userSession.userUId.value);
+    Get.offAndToNamed(AppLinks.mainRoute);
   }
 
 // Future<bool> verifyIsCustomer(Member member) async {

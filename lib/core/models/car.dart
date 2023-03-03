@@ -9,8 +9,8 @@ class Car {
   CarBrand carBrand;
   int nbrStars;
   int nbrPlaces;
-  double rentalPrice;
-  double carSpeed;
+  int rentalPrice;
+  int carSpeed;
   String carImageUrl;
   String carModel;
   int addedDate;

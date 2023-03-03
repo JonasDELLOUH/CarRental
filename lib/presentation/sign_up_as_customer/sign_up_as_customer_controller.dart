@@ -36,9 +36,9 @@ class SignUpAsCustomerController extends GetxController {
       await customerServices.addToFirebase(map,
           file: identityFile.value, file2: memberImage.value);
       appSnackBar("success", "you_are_customer".tr, "");
-      userSession.getCurrentMember(userUid: userSession.member.value!.memberId);
+      await userSession.getCurrentMember(userUid: userSession.member.value!.memberId);
       btnController.stop();
-      Get.offNamed(AppLinks.rentRoute);
+      Get.offNamed(AppLinks.mainRoute);
     }
   }
 }

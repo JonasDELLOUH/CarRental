@@ -9,21 +9,20 @@ import 'date_handler.dart';
 
 Widget locationCard(
     {required Location location, required void Function() function}) {
-  return Container(
-    margin: const EdgeInsets.symmetric(vertical: 10),
-    padding: const EdgeInsets.all(10),
-    decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-            bottomRight: Radius.circular(20),
-            bottomLeft: Radius.circular(20))),
-    child: Column(
-      children: [
-        Expanded(
-          flex: 3,
-          child: Row(
+  return SingleChildScrollView(
+    child: Container(
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.all(10),
+      decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+              bottomLeft: Radius.circular(20))),
+      child: Column(
+        children: [
+          Row(
             children: [
               Expanded(
                 child: Image.network(
@@ -33,7 +32,6 @@ Widget locationCard(
               ),
               Expanded(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     myText(
                         text:
@@ -66,42 +64,41 @@ Widget locationCard(
               )
             ],
           ),
-        ),
-        Expanded(
-            child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                MyIcons.attachMoney(color: ConstColors.secondaryColor),
-                myText(
-                    text: " ${location.car.rentalPrice * 0.7} FCFA/${"day".tr}",
-                    fontSize: 12)
-              ],
-            ),
-            InkWell(
-              onTap: function,
-              child: Container(
-                padding: const EdgeInsets.all(5),
-                width: 100,
-                decoration: const BoxDecoration(
-                    color: ConstColors.redColor,
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(5),
-                        topLeft: Radius.circular(5),
-                        bottomLeft: Radius.circular(5),
-                        bottomRight: Radius.circular(5))),
-                child: Center(
-                  child: myText(
-                      text: 'to_free'.tr,
-                      color: ConstColors.backgroundColor,
-                      fontSize: 15),
-                ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+          Row(
+            children: [
+              MyIcons.attachMoney(color: ConstColors.secondaryColor),
+              myText(
+                  text: " ${location.car.rentalPrice} FCFA/${"day".tr}",
+                  fontSize: 12)
+            ],
+          ),
+          InkWell(
+            onTap: function,
+            child: Container(
+              padding: const EdgeInsets.all(5),
+              width: 100,
+              decoration: const BoxDecoration(
+                  color: ConstColors.redColor,
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(5),
+                      topLeft: Radius.circular(5),
+                      bottomLeft: Radius.circular(5),
+                      bottomRight: Radius.circular(5))),
+              child: Center(
+                child: myText(
+                    text: 'to_free'.tr,
+                    color: ConstColors.backgroundColor,
+                    fontSize: 15),
               ),
-            )
-          ],
-        ))
-      ],
+            ),
+          )
+            ],
+          )
+        ],
+      ),
     ),
   );
 }

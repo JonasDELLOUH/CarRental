@@ -1,5 +1,9 @@
 import 'dart:io';
 
+import 'package:car_rental/core/constants/firestore_constants.dart';
+import 'package:car_rental/core/models/car_brand.dart';
+import 'package:car_rental/core/services/car_brand_services.dart';
+import 'package:car_rental/core/services/car_services.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -8,8 +12,6 @@ import '../core/models/customer.dart';
 import '../core/models/location.dart';
 import '../core/services/location_services.dart';
 import '../core/widgets/my_gradient.dart';
-
-
 
 class WritePost extends StatefulWidget {
   const WritePost({Key? key}) : super(key: key);
@@ -114,18 +116,34 @@ class _WritePostState extends State<WritePost> {
     });
   }
 
-  sendToFirebase() {
+  sendToFirebase() async {
     FocusScope.of(context).requestFocus(FocusNode());
     // Navigator.pop(context);
     if (true) {
-      Location reservation = Location(
-        nbrDayOfRent: 1,
-          locationId: "",
-          customer: Customer.defaultCustomer(),
-          car: Car.defaultCar(),
-          locationDate: DateTime.now().millisecondsSinceEpoch.toInt());
-      LocationServices reservationServices = LocationServices();
-      reservationServices.addToFirebase(reservation.toMap());
+      // Location reservation = Location(
+      //   nbrDayOfRent: 1,
+      //     locationId: "",
+      //     customer: Customer.defaultCustomer(),
+      //     car: Car.defaultCar(),
+      //     locationDate: DateTime.now().millisecondsSinceEpoch.toInt());
+      // LocationServices reservationServices = LocationServices();
+      // reservationServices.addToFirebase(reservation.toMap());
+      CarServices carServices = CarServices();
+      Map<String, dynamic> map = {
+        FirestoreConstants.carBrand: 'tQ1POF2GUAMaIyb42BHA',
+        FirestoreConstants.nbrStars: 5,
+        FirestoreConstants.nbrPlaces: 4,
+        FirestoreConstants.rentalPrice: 17000,
+        FirestoreConstants.carSpeed: 270,
+        FirestoreConstants.carModel: 'Lexus RX',
+        FirestoreConstants.addedDate:
+            DateTime.now().millisecondsSinceEpoch.toInt(),
+        FirestoreConstants.isReserved: false,
+        FirestoreConstants.isRented: false,
+        FirestoreConstants.overview:
+            "Le RX est un SUV de luxe qui est disponible en version standard ou hybride. Il est connu pour son confort de conduite et son design élégant."
+      };
+      await carServices.addToFirebase(map, file: _imageFile);
     }
   }
 }

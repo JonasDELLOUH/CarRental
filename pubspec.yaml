@@ -58,6 +58,7 @@ dependencies:
   drop_down_list: ^0.0.4
   input_quantity: ^1.1.4
   shared_preferences: ^2.0.18
+  kkiapay_flutter_sdk: ^1.2.1
 
 dev_dependencies:
   flutter_test:

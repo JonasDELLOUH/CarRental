@@ -14,12 +14,13 @@ class Splash1Controller extends GetxController {
     Future.delayed(const Duration(seconds: 1), () async {
       String uid = await getSharedPrefReturn(ConstString.userUidPrefKey);
       if (uid.isNotEmpty && uid != "null") {
+        print("yess");
         try{
-          userSession.getCurrentMember(userUid: uid);
+          await userSession.getCurrentMember(userUid: uid);
+          Get.offAndToNamed(AppLinks.mainRoute);
         } catch(e, strace){
           Get.toNamed(AppLinks.signInRoute);
         }
-        Get.toNamed(AppLinks.splash2Route);
       } else {
         Get.toNamed(AppLinks.signInRoute);
       }

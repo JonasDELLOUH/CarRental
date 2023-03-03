@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 
 import '../widgets/text_widgets.dart';
 
-Widget CarBrandCard({required CarBrand carBrand, required double height}) {
+Widget CarBrandCard({required CarBrand carBrand, required double height, void Function()? onTap}) {
   return InkWell(
-    onTap: () {},
+    onTap: () {
+      onTap;
+    },
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [

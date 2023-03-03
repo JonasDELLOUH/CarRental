@@ -33,11 +33,11 @@ class SignUpController extends GetxController {
     try {
       String? uid = await _authService.signInWithGoogle();
       if (uid != null) {
-        userSession.getCurrentMember(userUid: uid);
+        userSession.userUId.value = uid;
       }
       googleBtnController.stop();
       appSnackBar("success", 'login_success'.tr, "");
-      Get.offAllNamed(AppLinks.splash2Route);
+      Get.toNamed(AppLinks.splash2Route);
     } on FirebaseAuthException catch (e, strace) {
       googleBtnController.stop();
       if (e.code == 'network-request-failed') {

@@ -1,3 +1,4 @@
+import 'package:car_rental/core/constants/firestore_constants.dart';
 import 'package:get/get.dart';
 
 import '../../core/models/car.dart';
@@ -34,11 +35,16 @@ class HomeController extends GetxController{
     List l = await carBrandServices.getCollectionToMap();
     carBrands.value = CarBrand.toList(l);
   }
-
   getCars() async {
     final carServices = CarServices();
-    List l = await carServices.getCollectionToMap();
+    List l = await carServices.getCollectionToMap(limit: 5);
     cars.value = Car.toList(l);
+  }
+
+  getCarrWithCarBrand({required String carBrandId}) async{
+    cars.value = [];
+    final carServices = CarServices();
+    List l = await carServices.getCollectionToMap(limit: 5, fieldName: FirestoreConstants.carBrand, value: carBrandId);
   }
 
 }
