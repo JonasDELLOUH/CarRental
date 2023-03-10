@@ -9,7 +9,7 @@ class CarDetailsController extends GetxController {
   Rxn<Car> car = Rxn<Car>();
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
     car.value = Get.arguments;
   }

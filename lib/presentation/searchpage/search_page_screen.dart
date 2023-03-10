@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wp_search_bar/wp_search_bar.dart';
 
+import '../../app/env/links.dart';
 import '../../core/constants/colors.dart';
 import '../../core/constants/my_icons.dart';
 import '../../core/models/car.dart';
@@ -91,11 +92,7 @@ class SearchPageScreen extends StatelessWidget {
                       car: controller.cars.value![index],
                       height: height * 0.51,
                       function: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CarDetailsScreen(
-                                    car: controller.cars.value![index])));
+                        Get.toNamed(AppLinks.carDetailsRoute, arguments: controller.cars.value![index]);
                       });
                 },
                 itemCount: controller.cars.value!.length,

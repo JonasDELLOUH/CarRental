@@ -1,6 +1,7 @@
 import 'package:car_rental/presentation/home/home_controller.dart';
 import 'package:car_rental/presentation/main/main_controller.dart';
 import 'package:car_rental/presentation/rent/rent_controller.dart';
+import 'package:car_rental/presentation/searchpage/search_page_controller.dart';
 import 'package:get/get.dart';
 
 import '../locations/location_controller.dart';
@@ -14,5 +15,6 @@ class MainBinding extends Bindings {
     Get.lazyPut(() => LocationController());
     Get.lazyPut(() => SettingsController());
     Get.lazyPut(() => RentController());
+    Get.lazyPut(() => SearchPageController());
   }
 }
