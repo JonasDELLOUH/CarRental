@@ -16,9 +16,19 @@ class CustomerServices extends BaseServices {
   MemberServices memberServices = MemberServices();
 
   @override
-  Future<List> getCollectionToMap({String fieldName = "", dynamic value, int limit = 5}) async {
+  Future<List> getCollectionToMap(
+      {String fieldName = "",
+      dynamic value,
+      int limit = 5,
+      String where1Field = "",
+      dynamic value1 = ""}) async {
     MemberServices memberServices = MemberServices();
-    List l = await super.getCollectionToMap(limit: limit, fieldName: fieldName, value: value);
+    List l = await super.getCollectionToMap(
+        limit: limit,
+        fieldName: fieldName,
+        value: value,
+        where1Field: where1Field,
+        value1: value1);
     for (dynamic customer in l) {
       Map<String, dynamic>? map = await memberServices.getDocumentToMap(
           document: customer[FirestoreConstants.member]);

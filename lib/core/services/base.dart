@@ -82,7 +82,6 @@ abstract class BaseServices {
         map[FirestoreConstants.imageUrl] = urlString;
       }
       await document.update(map);
-      appSnackBar("success", "update_ok".tr, "");
     } on TimeoutException catch (e, strace) {
       appSnackBar("error", "is_time_out_exception".tr, "");
       print(e);
@@ -201,18 +200,32 @@ abstract class BaseServices {
   // }
 
   Future<List> getCollectionToMap(
-      {String fieldName = "", dynamic value, int limit = 5}) async {
+      {String fieldName = "",
+      dynamic value,
+      int limit = 5,
+      String where1Field = "",
+      dynamic value1 = ""}) async {
     List datas = [];
     QuerySnapshot querySnapshot;
     try {
-      if (fieldName.isNotEmpty) {
+      if (fieldName.isNotEmpty && where1Field.isNotEmpty) {
         querySnapshot = await FirebaseFirestore.instance
             .collection(collectionName)
-            .where(fieldName, isEqualTo: value).limit(limit)
+            .where(fieldName, isEqualTo: value)
+            .where(where1Field, isEqualTo: value1)
+            .limit(limit)
+            .get();
+      } else if (fieldName.isNotEmpty) {
+        querySnapshot = await FirebaseFirestore.instance
+            .collection(collectionName)
+            .where(fieldName, isEqualTo: value)
+            .limit(limit)
             .get();
       } else {
-        querySnapshot =
-            await FirebaseFirestore.instance.collection(collectionName).limit(limit).get();
+        querySnapshot = await FirebaseFirestore.instance
+            .collection(collectionName)
+            .limit(limit)
+            .get();
       }
 
       for (final DocumentSnapshot documentSnapshot in querySnapshot.docs) {

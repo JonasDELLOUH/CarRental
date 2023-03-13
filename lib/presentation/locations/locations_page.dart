@@ -32,14 +32,14 @@ class LocationsPage extends StatelessWidget {
           size.height * 0.8,) : controller.locations.isEmpty
             ? Center(child: myText(text: 'no_car_rented'.tr, fontSize: 50),)
             : reservationsView(
-                context: context, reservations: controller.locations)),
+                context: context, locations: controller.locations)),
       ),
     );
   }
 
   Widget reservationsView(
       {required BuildContext context,
-      required List<Location> reservations}) {
+      required List<Location> locations}) {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount:
@@ -49,9 +49,11 @@ class LocationsPage extends StatelessWidget {
           childAspectRatio: 1.5),
       itemBuilder: (BuildContext context, index) {
         return locationCard(
-            location: reservations[index], function: () {});
+            location: locations[index], function: () {
+              controller.releaseLocation(location: locations[index]);
+        });
       },
-      itemCount: reservations.length,
+      itemCount: locations.length,
     );
   }
 }

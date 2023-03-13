@@ -34,6 +34,7 @@ class RentController extends GetxController {
       FirestoreConstants.nbrDayOfRent: nbrDay.value,
       FirestoreConstants.locationDate: DateTime.now().millisecondsSinceEpoch,
       FirestoreConstants.car: car.value!.carId,
+      FirestoreConstants.isReleased: false
     };
 
     await locationServices.addToFirebase(map);
@@ -54,6 +55,5 @@ class RentController extends GetxController {
     //           transactionId: response['transactionId']
     //       )),
     // );
-
   }
 }

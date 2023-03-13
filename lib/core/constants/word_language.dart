@@ -82,7 +82,8 @@ class WordLanguage extends Translations {
           'pay': "Pay",
           'log_out': "Log out",
           'location_added': "Location added",
-          'have_account': "Already have an account? "
+          'have_account': "Already have an account? ",
+          'car_released': "Car Released"
         },
         'fr_FR': {
           'sign': 'Connectez-vous à votre compte',
@@ -165,7 +166,8 @@ class WordLanguage extends Translations {
           'pay': "Payer",
           'log_out': "Se déconnecter",
           'location_added': "Location ajoutée",
-          'have_account': "Vous avez un compte? "
+          'have_account': "Vous avez un compte? ",
+          'car_released': "Voiture libérée"
         }
       };
 }

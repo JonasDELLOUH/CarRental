@@ -15,10 +15,12 @@ class LocationServices extends BaseServices {
 
   @override
   Future<List> getCollectionToMap(
-      {String fieldName = "", dynamic value, int limit = 5}) async {
+      {String fieldName = "", dynamic value, int limit = 5,
+        String where1Field = "",
+        dynamic value1 = ""}) async {
     CarServices carServices = CarServices();
     CustomerServices customerServices = CustomerServices();
-    List l = await super.getCollectionToMap(fieldName: fieldName, value: value, limit: limit);
+    List l = await super.getCollectionToMap(fieldName: fieldName, value: value, limit: limit, where1Field: where1Field, value1: value1);
     for (dynamic reservation in l) {
       Map<String, dynamic>? map1 = await carServices.getDocumentToMap(
           document: reservation[FirestoreConstants.car]);
